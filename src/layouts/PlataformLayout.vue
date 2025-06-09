@@ -1,6 +1,6 @@
 <template>
-  <h1>layout-1</h1>
-  <v-main>
+  <side-menu/>
+  <v-main style="display: flex; gap: 10px;">
     <router-view />
   </v-main>
 </template>
