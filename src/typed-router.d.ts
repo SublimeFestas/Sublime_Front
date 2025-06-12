@@ -23,8 +23,12 @@ declare module 'vue-router/auto-routes' {
     '/plataform/auth/forgotPassword': RouteRecordInfo<'/plataform/auth/forgotPassword', '/plataform/auth/forgotPassword', Record<never, never>, Record<never, never>>,
     '/plataform/auth/login': RouteRecordInfo<'/plataform/auth/login', '/plataform/auth/login', Record<never, never>, Record<never, never>>,
     '/plataform/auth/register': RouteRecordInfo<'/plataform/auth/register', '/plataform/auth/register', Record<never, never>, Record<never, never>>,
-    '/plataform/dashboard/': RouteRecordInfo<'/plataform/dashboard/', '/plataform/dashboard', Record<never, never>, Record<never, never>>,
     '/plataform/locations/[id]': RouteRecordInfo<'/plataform/locations/[id]', '/plataform/locations/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
     '/plataform/locations/add': RouteRecordInfo<'/plataform/locations/add', '/plataform/locations/add', Record<never, never>, Record<never, never>>,
+    '/plataform/manager/': RouteRecordInfo<'/plataform/manager/', '/plataform/manager', Record<never, never>, Record<never, never>>,
+    '/plataform/manager/clients': RouteRecordInfo<'/plataform/manager/clients', '/plataform/manager/clients', Record<never, never>, Record<never, never>>,
+    '/plataform/manager/decorations': RouteRecordInfo<'/plataform/manager/decorations', '/plataform/manager/decorations', Record<never, never>, Record<never, never>>,
+    '/plataform/manager/hall': RouteRecordInfo<'/plataform/manager/hall', '/plataform/manager/hall', Record<never, never>, Record<never, never>>,
+    '/plataform/manager/locations': RouteRecordInfo<'/plataform/manager/locations', '/plataform/manager/locations', Record<never, never>, Record<never, never>>,
   }
 }

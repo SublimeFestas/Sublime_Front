@@ -1,6 +1,6 @@
 <template>
-    <h1>plataforma</h1>
+    <h1>Em devops</h1>
 </template>
+
 <script setup>
-//
 </script>
