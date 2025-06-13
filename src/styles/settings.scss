@@ -8,3 +8,8 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
+
+
+@use 'vuetify/settings' with (
+  $body-font-family: 'Poppins'
+);
