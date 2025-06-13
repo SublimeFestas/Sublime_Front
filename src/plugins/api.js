@@ -7,6 +7,8 @@ const api = axios.create({
   timeout: 100000,
 });
 
+export default api;
+
 
 
 // Pós Autenticação

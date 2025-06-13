@@ -1,16 +1,16 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, reactive } from "vue";
 import user from "../services/userAuthService";
 
-export const useAuth = defineStore("user", () => {
-    const state = useState("user", () => ({
+export const userAuth = defineStore("user", () => {
+    const state = reactive({
         user: null,
         token: null,
         loading: false,
         isAuthenticated: false
-    }));
+    });
 
-    const Login = async (username, password) => {
+    const login = async (username, password) => {
         state.loading = true;
         try {
             const response = await user.login(username, password);
@@ -25,11 +25,11 @@ export const useAuth = defineStore("user", () => {
         }
     };
 
-    const Logout = () => {
+    const logout = () => {
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;
     };
 
-    return { state, Login, Logout };
+    return { state, login, logout };
 });

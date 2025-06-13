@@ -1,18 +1,18 @@
 import api from '@/plugins/api'
 
 class AuthService {
-    async login(username, password) {
+    async login(email, password) {
         try {
-        const response = await api.post('/token', { username, password })
+        const response = await api.post('/token/', { email, password })
         return response.data
         } catch (error) {
         throw new Error('Falha na autenticacao: ' + error.message)
         }
     }
 
-    async register(username, password, email) {
+    async register(email, password, name) {
         try {
-        const response = await api.post('/usuarios', { username, password, email })
+        const response = await api.post('/usuarios/', { email, password, name })
         return response.data
         } catch (error) {
         throw new Error('Falha no registro: ' + error.message)
