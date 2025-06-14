@@ -136,7 +136,7 @@ function Login() {
   userStore
     .login(user.email, user.senha)
     .then(() => {
-      router.push("/plataform/");
+      router.push("/plataform/manager/locations");
     })
 }
 </script>
