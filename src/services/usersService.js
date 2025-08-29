@@ -1,10 +1,19 @@
 import api from '@/plugins/api'
 
 class UsersService {
+    async getAllUsers() {
+        try {
+            const { data } = await api.get('/usuarios');
+            return data;
+        } catch (error) {
+            throw new Error('Falha ao buscar usuarios: ' + error.message);
+        }
+    }
+
     async getUser(id) {
         try {
-            const response = await api.get(`/usuarios/${id}`);
-            return response.data;
+            const { data } = await api.get(`/usuarios/${id}`);
+            return data;
         } catch (error) {
             throw new Error('Falha ao buscar usuario: ' + error.message);
         }
@@ -12,8 +21,8 @@ class UsersService {
 
     async updateUser(id, userData) {
         try {
-            const response = await api.put(`/usuarios/${id}`, userData);
-            return response.data;
+            await api.put(`/usuarios/${id}`, userData);
+            console.log('Usuario atualizado com sucesso');
         } catch (error) {
             throw new Error('Falha ao atualizar usuario: ' + error.message);
         }
@@ -22,6 +31,7 @@ class UsersService {
     async deleteUser(id) {
         try {
             await api.delete(`/usuarios/${id}`);
+            console.log('Usuario deletado com sucesso');
         } catch (error) {
             throw new Error('Falha ao deletar usuario: ' + error.message);
         }
