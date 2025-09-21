@@ -1,10 +1,10 @@
 <template>
   <plataformLayout>
-    <div style="padding: 32px;">
+    <div style="padding: 32px; background-color: #fff; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); height: 100%;">
       <!-- Busca -->
       <v-text-field
         v-model="search"
-        label="Buscar Locação"
+        label="Buscar Cliente"
         variant="outlined"
         style="max-width: 500px; margin-bottom: 32px;"
         clearable
@@ -16,15 +16,15 @@
           <tr>
             <th style="color:#b0b0b0; font-weight:600;">NOME</th>
             <th style="color:#b0b0b0; font-weight:600;">EMAIL</th>
-            <th style="color:#b0b0b0; font-weight:600;">NUMERO</th>
+            <th style="color:#b0b0b0; font-weight:600;">NÚMERO</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="user in userList.results" :key="user.id">
-            <td>{{ user.name }}</td>
-            <td><div style="font-weight:600;">{{ user.email }}</div></td>
-            <td><div style="font-size:0.9em; color:#888;">{{ user.phone }}</div></td>
+          <tr v-for="user in userList.results" :key="user.id" style="height:80px;">
+            <td style="font-weight:600;">{{ user.name }}</td>
+            <td><div>{{ user.email }}</div></td>
+            <td><div>{{ user.phone }}</div></td>
             <td>
               <v-btn icon variant="text" color="primary">
                 <v-icon>mdi-open-in-new</v-icon>

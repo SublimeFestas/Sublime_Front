@@ -19,7 +19,7 @@ axiosInstance.interceptors.request.use(
   }
 );
 
-// Refresh token interceptor
+// Interceptador de respostas e verificador de token
 axiosInstance.interceptors.response.use(
   (response) => {
     console.log('Resposta bem-sucedida:', response.data);
@@ -34,18 +34,12 @@ axiosInstance.interceptors.response.use(
 
       try {
         const refreshToken = localStorage.getItem('refresh_token');
-        if (!refreshToken) {
-          throw new Error('Refresh token ausente');
-        }
-
         const { data } = await axiosInstance.post('token/refresh/', {
           refresh: refreshToken,
         });
-
-        const newAccessToken = data.access;
-        localStorage.setItem('access_token', newAccessToken);
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${newAccessToken}`;
-        originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
+        localStorage.setItem('access_token', data.results.access);
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${data.results.access}`;
+        originalRequest.headers['Authorization'] = `Bearer ${data.results.access}`;
 
         return axiosInstance(originalRequest);
       } catch (refreshError) {

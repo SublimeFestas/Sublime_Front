@@ -3,10 +3,10 @@ import api from "@/plugins/api";
 class UserLogin {
     async login(email, password) {
         try {
-            const response = await api.post("token/", { email, password });
+            const {data} = await api.post("token/", { email, password });
 
-            const refreshToken = response.refresh;
-            const accessToken = response.access;
+            const refreshToken = data.refresh;
+            const accessToken = data.access;
 
             localStorage.setItem("access_token", accessToken);
             localStorage.setItem("refresh_token", refreshToken);
@@ -14,7 +14,7 @@ class UserLogin {
             api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
             console.log("Login bem-sucedido");
-            return response;
+            return data;
         } catch (error) {
             console.error("Erro ao fazer login:", error);
             throw error;
@@ -23,8 +23,8 @@ class UserLogin {
 
     async register(email, password, name) {
         try {
-            const response = await api.post('/usuarios/', { email, password, name })
-            return response.data
+            const data = await api.post('/usuarios/', { email, password, name })
+            return data.data
         } catch (error) {
             throw new Error('Falha no registro: ' + error.message)
         }
@@ -35,6 +35,8 @@ class UserLogin {
         localStorage.removeItem("refresh_token");
         delete api.defaults.headers.common["Authorization"];
         console.log("Logout efetuado");
+        // Redirecione para a página de login
+        window.location.href = "/plataform/auth/login";
     }
 }
 
