@@ -129,7 +129,7 @@ const valid = computed(() => {
     rules.email(user.email) === true
   );
 });
-
+  
 async function Login() {
   try {
     console.log("Dados enviados:", user.email, user.senha);
