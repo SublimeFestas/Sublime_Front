@@ -31,14 +31,14 @@
         />
         <v-text-field
           v-model="user.senha"
-          :type="showPassword ? 'text' : 'password'"
+          :type="mostrarSenha ? 'text' : 'password'"
           label="Senha"
           variant="outlined"
           density="comfortable"
           style="margin-bottom: 4px"
           :error="senhaIncorreta"
-          :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
-          @click:append-inner="showPassword = !showPassword"
+          :append-inner-icon="mostrarSenha ? 'mdi-eye-off' : 'mdi-eye'"
+          @click:append-inner="mostrarSenha = !mostrarSenha"
           hide-details="auto"
         />
         <div
@@ -106,19 +106,17 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import { userAuth } from "@/stores/userAuthStore.js";
+import UserLogin from "@/services/userAuthService.js";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-
-const userStore = userAuth();
 
 const user = reactive({
   email: "",
   senha: "",
 });
 
-const showPassword = ref(false);
+const mostrarSenha = ref(false);
 
 const rules = {
   email: (v) => /.+@.+\..+/.test(v) || "E-mail inválido",
@@ -131,12 +129,18 @@ const valid = computed(() => {
     rules.email(user.email) === true
   );
 });
-
-function Login() {
-  userStore
-    .login(user.email, user.senha)
-    .then(() => {
-      router.push("/plataform/manager/locations");
-    })
+  
+async function Login() {
+  try {
+    console.log("Dados enviados:", user.email, user.senha);
+    await UserLogin.login(user.email, user.senha);
+    router.push("/plataform/manager/locations");
+  } catch (error) {
+    if (error.response?.status === 401) {
+      console.error("Erro de autenticação: Usuário ou senha inválidos.");
+    } else {
+      console.error("Erro ao fazer login:", error);
+    }
+  }
 }
 </script>

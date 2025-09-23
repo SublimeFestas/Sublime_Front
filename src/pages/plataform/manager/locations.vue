@@ -1,6 +1,6 @@
 <template>
   <plataformLayout>
-    <div style="padding: 32px;">
+    <div style="padding: 32px; background-color: #fff; height: 100%; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
       <!-- Busca -->
       <v-text-field
         v-model="search"
@@ -23,18 +23,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in paginated" :key="item.id">
-            <td>{{ item.date }}</td>
+          <tr v-for="location in locationsList.results" :key="location.id" style="height:80px;">
+            <td>{{ formatDate(location.data_festa) }}</td>
             <td>
-              <div style="font-weight:600;">{{ item.client }}</div>
-              <div style="font-size:0.9em; color:#888;">{{ item.phone }}</div>
+              <div style="font-weight:600;">{{ location.user.name }}</div>
+              <div style="font-size:0.9em; color:#888;">{{ location.user.phone }}</div>
             </td>
             <td>
-              <v-chip size="small" color="#eee" style="color:#444;">{{ item.rented }}</v-chip>
+              <v-chip size="small" color="#eee" style="color:#444;">{{ location.tipo_locacao }}</v-chip>
             </td>
-            <td>R$ {{ item.value.toLocaleString('pt-BR', {minimumFractionDigits: 2}) }}</td>
+            <td>R$ {{ location.valor_festa }}</td>
             <td>
-              <v-chip size="small" color="#fdeaea" style="color:#e57373;">{{ item.payment }}</v-chip>
+              <v-chip size="small" color="#fdeaea" style="color:#e57373;">Pendente</v-chip>
             </td>
             <td>
               <v-btn icon variant="text" color="primary">
@@ -59,45 +59,18 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { useLocationsStore } from '@/stores/locationsStore'
+import {formatDate} from '@/utils/formatDate'
 
-const allData = [
-  {
-    id: 1,
-    date: '15 / 09 / 2026',
-    client: 'Mirella A. Quintino',
-    phone: '+55 47 9394-9481',
-    rented: 'Decoração',
-    value: 960.90,
-    payment: 'Pendente'
-  },
-  {
-    id: 2,
-    date: '15 / 09 / 2026',
-    client: 'Mirella A. Quintino',
-    phone: '+55 47 9394-9481',
-    rented: 'Espaço',
-    value: 960.90,
-    payment: 'Pendente'
-  },
-]
+const locationsStore = useLocationsStore()
+const locationsList = ref([])
 
-const search = ref('')
-const page = ref(1)
-const itemsPerPage = 8
+const getLocations = async () => {
+  locationsList.value = await locationsStore.getLocations(1)
+  console.log('dados recebidos:', locationsList.value)
+}
 
-const filtered = computed(() => {
-  if (!search.value) return allData
-  return allData.filter(item =>
-    item.client.toLowerCase().includes(search.value.toLowerCase()) ||
-    item.rented.toLowerCase().includes(search.value.toLowerCase()) ||
-    item.date.includes(search.value)
-  )
-})
-
-const pageCount = computed(() => Math.ceil(filtered.value.length / itemsPerPage))
-
-const paginated = computed(() => {
-  const start = (page.value - 1) * itemsPerPage
-  return filtered.value.slice(start, start + itemsPerPage)
+onMounted(() => {
+  getLocations()
 })
 </script>
