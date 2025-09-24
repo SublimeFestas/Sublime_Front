@@ -26,8 +26,8 @@
           <tr v-for="location in locationsList.results" :key="location.id" style="height:80px;">
             <td>{{ formatDate(location.data_festa) }}</td>
             <td>
-              <div style="font-weight:600;">{{ location.user.name }}</div>
-              <div style="font-size:0.9em; color:#888;">{{ location.user.phone }}</div>
+              <div style="font-weight:600;">{{ location.user?.name || 'N/A' }}</div>
+              <div style="font-size:0.9em; color:#888;">{{ location.user?.phone || 'N/A' }}</div>
             </td>
             <td>
               <v-chip size="small" color="#eee" style="color:#444;">{{ location.tipo_locacao }}</v-chip>

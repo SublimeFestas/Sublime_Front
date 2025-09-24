@@ -21,7 +21,7 @@
         style="border-radius:6px; margin:5px; gap: 5px;"
         :style="item.title === selectedItem ? 'background-color: #C8E2CB' : ''">
         <template #prepend>
-          <img :src="`/src/assets/icons/${item.icon}`" alt="" style="width:22px; height:22px;" />
+          <img :src="getIconPath(item.icon)" alt="" style="width:22px; height:22px;" />
         </template>
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>
@@ -49,6 +49,11 @@ import UserLogin from "@/services/userAuthService.js";
 
 const router = useRouter();
 const route = useRoute();
+
+// Função para obter o caminho correto do ícone
+const getIconPath = (iconName) => {
+  return `/icons/${iconName}`;
+};
 
 const menuItems = [
   { title: "Locações", icon: "document_icon.svg", route:"/plataform/manager/locations"},

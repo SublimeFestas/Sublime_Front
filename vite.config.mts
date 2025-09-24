@@ -96,8 +96,10 @@ export default defineConfig({
           vuetify: ['vuetify']
         }
       }
-    }
+    },
+    assetsDir: 'assets'
   },
+  assetsInclude: ['**/*.svg'],
   css: {
     preprocessorOptions: {
       sass: {

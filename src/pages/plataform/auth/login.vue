@@ -59,7 +59,7 @@
               align-items: center;
               gap: 4px;
             "
-            ><img src="@/assets/icons/alert_icon.svg" alt="" />
+            ><img :src="alertIcon" alt="" />
             Senha Incorreta
           </span>
           <router-link
@@ -108,6 +108,8 @@
 import { ref, computed } from "vue";
 import UserLogin from "@/services/userAuthService.js";
 import { useRouter } from "vue-router";
+
+const alertIcon = '/icons/alert_icon.svg';
 
 const router = useRouter();
 

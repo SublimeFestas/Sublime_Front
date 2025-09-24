@@ -79,7 +79,7 @@
               align-items: center;
               gap: 4px;
             "
-            ><img src="@/assets/icons/alert_icon.svg" alt="" />
+            ><img :src="alertIcon" alt="" />
             Senhas Divergentes
           </span>
         </div>
@@ -122,6 +122,8 @@
 import { ref, computed, reactive } from "vue";
 import { useRouter } from "vue-router";
 import { userRegister } from "@/stores/registerStore";
+
+const alertIcon = '/icons/alert_icon.svg';
 const router = useRouter();
 const registerStore = userRegister();
 
