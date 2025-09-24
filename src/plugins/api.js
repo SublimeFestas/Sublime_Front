@@ -3,6 +3,8 @@ import UserLogin from "@/services/userAuthService.js";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
+})
+
 const api = axios.create({
   // baseURL: 'http://localhost:8000/api',
   baseURL: 'https://sublime-back.onrender.com/api',
@@ -58,5 +60,5 @@ axiosInstance.interceptors.response.use(
   }
 );
 
-export default axiosInstance;
+export default axiosInstance
 
