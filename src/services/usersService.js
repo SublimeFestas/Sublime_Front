@@ -21,16 +21,31 @@ class UsersService {
 
     async updateUser(id, userData) {
         try {
-            await api.put(`/usuarios/${id}`, userData);
-            console.log('Usuario atualizado com sucesso');
+            const { phone, phones, ...userOnlyData } = userData;
+            
+            let phoneArray = [];
+            if (phones && Array.isArray(phones)) {
+                phoneArray = phones.filter(p => p && p.trim());
+            } else if (phone && phone.trim()) {
+                phoneArray = [phone.trim()];
+            }
+            
+            const requestData = {
+                ...userOnlyData,
+                telefones_write: phoneArray
+            };
+            
+            const response = await api.put(`/usuarios/${id}/`, requestData);
+            return response.data;
+            
         } catch (error) {
-            throw new Error('Falha ao atualizar usuario: ' + error.message);
+            throw new Error('Falha ao atualizar usuario: ' + (error.response?.data?.detail || error.message));
         }
     }
 
     async deleteUser(id) {
         try {
-            await api.delete(`/usuarios/${id}`);
+            await api.delete(`/usuarios/${id}/`);
             console.log('Usuario deletado com sucesso');
         } catch (error) {
             throw new Error('Falha ao deletar usuario: ' + error.message);

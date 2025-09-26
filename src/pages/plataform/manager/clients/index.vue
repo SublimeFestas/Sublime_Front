@@ -22,11 +22,17 @@
         </thead>
         <tbody>
           <tr v-for="user in userList.results" :key="user.id" style="height:80px;">
-            <td style="font-weight:600;">{{ user.name }}</td>
-            <td><div>{{ user.email }}</div></td>
-            <td><div>{{ user.phone }}</div></td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ 
+              user.phone || 
+              (user.telefones && user.telefones.length > 0 ? 
+                user.telefones.map(t => t.numero || t.phone).join(', ') : 
+                'N/A'
+              ) 
+            }}</td>
             <td>
-              <v-btn icon variant="text" color="primary">
+              <v-btn icon variant="text" color="primary" @click="$router.push(`/plataform/manager/clients/${user.id}`)">
                 <v-icon>mdi-open-in-new</v-icon>
               </v-btn>
             </td>
@@ -47,8 +53,9 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useUsersStore } from '@/stores/usersStore'
+import PlataformLayout from '@/components/layouts/PlataformLayout.vue'
 
 const usersStore = useUsersStore()
 const userList = ref([])

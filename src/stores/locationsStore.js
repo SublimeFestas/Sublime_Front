@@ -43,6 +43,20 @@ export const useLocationsStore = defineStore('locations', () => {
     }
   };
 
+  const getLocationsByUser = async (userId) => {
+    loading.value = true;
+    try {
+      const response = await LocationsService.getLocationsByUser(userId);
+      console.log('Locações do usuário carregadas:', response);
+      return response;
+    } catch (error) {
+      console.error('Erro ao realizar a requisicao das locações do usuário:', error);
+      return null;
+    } finally {
+      loading.value = false;
+    }
+  };
+
   const updateLocation = async (locationID, location) => {
     loading.value = true;
     try {
@@ -72,6 +86,7 @@ export const useLocationsStore = defineStore('locations', () => {
     isLoading,
     getLocations,
     getLocationById,
+    getLocationsByUser,
     createLocation,
     updateLocation,
     deleteLocation,

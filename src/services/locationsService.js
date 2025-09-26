@@ -19,6 +19,15 @@ class LocationsService {
         }
     }
 
+    async getLocationsByUser(userId) {
+        try {
+            const { data } = await api.get(`/alugueis?user=${userId}`);
+            return data;
+        } catch (error) {
+            throw new Error('Falha ao buscar alugueis do usuário: ' + error.message);
+        }
+    }
+
     async updateLocation(id, locationData) {
         try {
             await api.put(`/alugueis/${id}`, locationData);

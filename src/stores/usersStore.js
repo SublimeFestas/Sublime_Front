@@ -46,10 +46,10 @@ export const useUsersStore = defineStore('users', () => {
   const updateUser = async (userID, user) => {
     loading.value = true;
     try {
-      await usersService.updateUser(userID, user);
-      getUsers()
+      const result = await usersService.updateUser(userID, user);
+      return { success: true, data: result };
     } catch (error) {
-      console.error('Erro ao atualizar usuario:', error);
+      return { success: false, error: error.message };
     } finally {
       loading.value = false;
     }
