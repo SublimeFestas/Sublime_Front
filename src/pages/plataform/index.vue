@@ -1,6 +1,6 @@
 <template>
-    <h1>Em devops</h1>
-    <p>user: {{user}}</p>
+    <h1>Está pagina não existe</h1>
+    <v-btn to="/">Voltar</v-btn>
 </template>
 
 <script setup>
