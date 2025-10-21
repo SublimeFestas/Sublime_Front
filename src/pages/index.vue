@@ -144,6 +144,24 @@
       </div>
     </div>
   </main>
+  <footer>
+    <div style="border-top: 1px solid #444711; padding: 50px 100px;">
+      <img src="@/assets/logoCompleta.png" alt="" style="height:105px;">
+      <div style="display: flex; align-items: center; gap: 5px;">
+        <img src="@/assets/icons/location.svg" alt="" style=""> 
+        <p>Rua Antenor Douat Baptista, Ulysses Guimarâes, Joinville, Santa Catarina, Brasil.</p>
+      </div>
+      <p>Navegação</p>
+      <p>Minha conta</p>
+      <p>Minhas locações</p>
+      <p>Precisa de ajuda?</p>
+      <p>Entre em contato.</p>
+      <p>55 47 98765-6789</p>
+      <img src="@/assets/icons/ic_baseline-whatsapp.svg" alt="">
+      <img src="@/assets/icons/mdi_instagram.svg" alt="">
+      <img src="@/assets/icons/ic_baseline-facebook.svg" alt="">
+    </div>
+  </footer>
 </template>
 
 <script setup>
