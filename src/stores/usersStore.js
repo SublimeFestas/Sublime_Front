@@ -5,15 +5,29 @@ import usersService from '../services/usersService';
 export const useUsersStore = defineStore('users', () => {
   const loading = ref(false);
   const isLoading = computed(() => loading.value);
+  const selectedUser = ref(null);
 
   const getUsers = async (page) => {
     loading.value = true;
     try {
       const response = await usersService.getAllUsers(page);
       console.log('Usuarios carregados:', response);
-      return response;
+      return response.results  ;
     } catch (error) {
       console.error('Erro ao realizar a requisicao dos usuarios:', error);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const getFilteredUsers = async (filterParams, page) => {
+    loading.value = true;
+    try {
+      const response = await usersService.getFilteredUsers(filterParams, page);
+      console.log('Usuarios filtrados carregados:', response);
+      return response.results;
+    } catch (error) {
+      console.error('Erro ao realizar a requisicao dos usuarios filtrados:', error);
     } finally {
       loading.value = false;
     }
@@ -71,9 +85,11 @@ export const useUsersStore = defineStore('users', () => {
     loading,
     isLoading,
     getUsers,
+    getFilteredUsers,
     getUserById,
     createUser,
     updateUser,
     deleteUser,
+    selectedUser,
   };
 });
