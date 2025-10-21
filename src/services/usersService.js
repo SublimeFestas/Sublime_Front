@@ -10,6 +10,15 @@ class UsersService {
         }
     }
 
+    async getFilteredUsers(filterParams, page) {
+        try {
+            const { data } = await api.get(`/usuarios?search=${filterParams}&page=${page}`);
+            return data;
+        } catch (error) {
+            throw new Error('Falha ao buscar usuarios filtrados: ' + error.message);
+        }
+    }
+
     async getUser(id) {
         try {
             const { data } = await api.get(`/usuarios/${id}`);
@@ -30,7 +39,7 @@ class UsersService {
 
     async deleteUser(id) {
         try {
-            await api.delete(`/usuarios/${id}`);
+            await api.delete(`/usuarios/${id}/`);
             console.log('Usuario deletado com sucesso');
         } catch (error) {
             throw new Error('Falha ao deletar usuario: ' + error.message);

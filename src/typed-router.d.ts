@@ -28,8 +28,6 @@ declare module 'vue-router/auto-routes' {
     '/plataform/manager/': RouteRecordInfo<'/plataform/manager/', '/plataform/manager', Record<never, never>, Record<never, never>>,
     '/plataform/manager/clients/': RouteRecordInfo<'/plataform/manager/clients/', '/plataform/manager/clients', Record<never, never>, Record<never, never>>,
     '/plataform/manager/clients/[id]': RouteRecordInfo<'/plataform/manager/clients/[id]', '/plataform/manager/clients/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
-    '/plataform/manager/decorations': RouteRecordInfo<'/plataform/manager/decorations', '/plataform/manager/decorations', Record<never, never>, Record<never, never>>,
-    '/plataform/manager/hall': RouteRecordInfo<'/plataform/manager/hall', '/plataform/manager/hall', Record<never, never>, Record<never, never>>,
-    '/plataform/manager/locations': RouteRecordInfo<'/plataform/manager/locations', '/plataform/manager/locations', Record<never, never>, Record<never, never>>,
+    '/plataform/manager/locations/': RouteRecordInfo<'/plataform/manager/locations/', '/plataform/manager/locations', Record<never, never>, Record<never, never>>,
   }
 }

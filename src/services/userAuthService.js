@@ -10,7 +10,6 @@ class UserLogin {
 
             localStorage.setItem("access_token", accessToken);
             localStorage.setItem("refresh_token", refreshToken);
-
             api.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
 
             console.log("Login bem-sucedido");
