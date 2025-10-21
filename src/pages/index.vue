@@ -139,11 +139,28 @@
         <h2 style="font-size: 40px; font-weight: 400;">Tempo de festa</h2>
         <p>São 4 horas de festa, as horas adicionais custam uma taxa. O valor da locação do lugar não inclui serviços adicionais.</p>
         <p>O valor da locação varia nos valores de acordo com o dia da semana escolhido, sendo nos finais de semana um valor mais alto.</p>
-        <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;"
-          size="large">Locar</v-btn>
+        <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;" size="large">Locar</v-btn>
       </div>
     </div>
   </main>
+  <footer>
+    <div style="border-top: 1px solid #444711; padding: 50px 100px;">
+      <img src="@/assets/logoCompleta.png" alt="" style="height:105px;">
+      <div style="display: flex; align-items: center; gap: 5px;">
+        <img src="@/assets/icons/location.svg" alt="" style=""> 
+        <p>Rua Antenor Douat Baptista, Ulysses Guimarâes, Joinville, Santa Catarina, Brasil.</p>
+      </div>
+      <p>Navegação</p>
+      <p>Minha conta</p>
+      <p>Minhas locações</p>
+      <p>Precisa de ajuda?</p>
+      <p>Entre em contato.</p>
+      <p>55 47 98765-6789</p>
+      <img src="@/assets/icons/ic_baseline-whatsapp.svg" alt="">
+      <img src="@/assets/icons/mdi_instagram.svg" alt="">
+      <img src="@/assets/icons/ic_baseline-facebook.svg" alt="">
+    </div>
+  </footer>
 </template>
 
 <script setup>
