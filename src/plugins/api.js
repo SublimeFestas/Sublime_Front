@@ -6,8 +6,6 @@ const axiosInstance = axios.create({
 })
 
 const api = axios.create({
-  // baseURL: 'http://localhost:8000/api',
-  baseURL: 'https://sublime-back.onrender.com/api',
   timeout: 100000,
 });
 
