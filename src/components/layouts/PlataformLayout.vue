@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex; background-color: #C8E2CB; padding: 20px; height: 100vh; gap: 20px;">
+  <div style="display: flex; padding: 20px; height: 100vh; gap: 20px; background-color: #fff;">
     <side-menu/>
     <v-main>
       <slot></slot>

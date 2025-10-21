@@ -1,9 +1,9 @@
 <template>
-  <div style="display: flex; flex-direction: column; width: 250px; background-color: #fff; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+  <v-card style="display: flex; flex-direction: column; width: 250px; background-color:#fff; border-radius: 10px;">
     <!-- Topo: Logo fixa -->
     <div style="flex-shrink:0; padding:62px 0 12px 0; display:flex; justify-content:center;">
       <div style="height:120px; max-width:100%; display:block;">
-        <img src="..\assets\logoSublimeSimbolo.png" alt="">
+        <img src="..\assets\logo.png" alt="">
       </div>
     </div>
 
@@ -18,8 +18,8 @@
         :value="item.title"
         :active="item.title === selectedItem"
         :to="item.route"
-        style="border-radius:6px; margin:5px; gap: 5px;"
-        :style="item.title === selectedItem ? 'background-color: #C8E2CB' : ''">
+        style="margin:5px 5px; gap: 5px;"
+        :style="item.title === selectedItem ? 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 5px !important' : ''">
         <template #prepend>
           <img :src="getIconPath(item.icon)" alt="" style="width:22px; height:22px;" />
         </template>
@@ -39,7 +39,7 @@
         </v-btn>
       </div>
     </template>
-  </div>
+  </v-card>
 </template>
 
 <script setup>
@@ -58,8 +58,6 @@ const getIconPath = (iconName) => {
 const menuItems = [
   { title: "Locações", icon: "document_icon.svg", route:"/plataform/manager/locations"},
   { title: "Clientes", icon: "group_icon.svg", route: "/plataform/manager/clients"},
-  { title: "Salão", icon: "house_icon.svg", route: "/plataform/manager/hall"},
-  { title: "Decorações", icon: "ballon_icon.svg", route: "/plataform/manager/decorations"},
 ];
 
 const selectedItem = computed(() => {
