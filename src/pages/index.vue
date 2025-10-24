@@ -171,8 +171,8 @@
         </div>
       </div>
     </div>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 30px 290px 100px; border-top: 1px solid #444711">
-      <p style="padding-top: 50px;">2025 Sublime Festas & Eventos.  Todos os direitos reservados.</p>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 30px 290px 60px; border-top: 1px solid #444711">
+      <p style="padding-top: 50px;">&copy; 2025 Sublime Festas & Eventos.  Todos os direitos reservados.</p>
     </div>
   </footer>
 </template>
