@@ -16,8 +16,8 @@
   </header>
   <main
     style="padding: 0px, 60px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-    <div style="position: relative;">
-      <img src="@/assets/banner.png" alt="">
+    <div style="position: relative; width: 90vw;">
+      <img src="@/assets/banner.png" alt="" width="100%">
       <img style="position: absolute; bottom: -30px; left: calc(50% - 90px);" src="@/assets/logoCompleta.png" alt="">
     </div>
     <div style="display: flex; gap: 300px; width: 100%; margin-top: 100px; justify-content: center;">
