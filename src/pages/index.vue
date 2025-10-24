@@ -144,21 +144,34 @@
     </div>
   </main>
   <footer>
-    <div style="border-top: 1px solid #444711; padding: 50px 100px;">
-      <img src="@/assets/logoCompleta.png" alt="" style="height:105px;">
-      <div style="display: flex; align-items: center; gap: 5px;">
-        <img src="@/assets/icons/location.svg" alt="" style=""> 
-        <p>Rua Antenor Douat Baptista, Ulysses Guimarâes, Joinville, Santa Catarina, Brasil.</p>
+    <div style="border-top: 1px solid #444711; padding: 50px 50px; display: flex; justify-content: space-between; margin: 0px 50px;">
+      <div>
+        <img src="@/assets/logoCompleta.png" style="height:105px;">
+        <div style="display: flex; align-items: center; gap: 5px; padding-top: 20px;">
+          <img src="@/assets/icons/location.svg">
+          <p style="">Rua Antenor Douat Baptista, Ulysses Guimarâes, Joinville, Santa Catarina, Brasil.</p>
+        </div>
       </div>
-      <p>Navegação</p>
-      <p>Minha conta</p>
-      <p>Minhas locações</p>
-      <p>Precisa de ajuda?</p>
-      <p>Entre em contato.</p>
-      <p>55 47 98765-6789</p>
-      <img src="@/assets/icons/ic_baseline-whatsapp.svg" alt="">
-      <img src="@/assets/icons/mdi_instagram.svg" alt="">
-      <img src="@/assets/icons/ic_baseline-facebook.svg" alt="">
+      <div style="display: flex; gap: 75px;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <p style="font-weight: 600;">Navegação</p>
+          <p>Minha conta</p>
+          <p>Minhas locações</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <p style="font-weight: 600;">Precisa de ajuda?</p>
+          <p>Entre em contato.</p>
+          <p>55 47 98765-6789</p>
+          <div style="display: flex; justify-content: space-between;">
+            <img src="@/assets/icons/ic_baseline-whatsapp.svg">
+            <img src="@/assets/icons/mdi_instagram.svg">
+            <img src="@/assets/icons/ic_baseline-facebook.svg">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 30px; margin: 30px 290px 100px; border-top: 1px solid #444711">
+      <p style="padding-top: 50px;">2025 Sublime Festas & Eventos.  Todos os direitos reservados.</p>
     </div>
   </footer>
 </template>
