@@ -1,6 +1,7 @@
 import api from '@/plugins/api'
 
 class LocationsService {
+
     async getAllLocations() {
         try {
             const { data } = await api.get('/alugueis');
@@ -10,9 +11,27 @@ class LocationsService {
         }
     }
 
+    async getFilteredLocations(filterParams, page) {
+        try {
+            const { data } = await api.get(`/alugueis?search=${filterParams}&page=${page}`);
+            return data;
+        } catch (error) {
+            throw new Error('Falha ao buscar alugueis filtrados: ' + error.message);
+        }
+    }
+
+    async getLocationsByUserId(userId) {
+        try {
+            const { data } = await api.get(`/alugueis/por-usuario/${userId}`);
+            return data;
+        } catch (error) {
+            throw new Error('Falha ao buscar alugueis por usuario: ' + error.message);
+        }
+    }
+    
     async getLocation(id) {
         try {
-            const { data } = await api.get(`/alugueis/${id}`);
+            const { data } = await api.get(`/alugueis/${id}/`);
             return data;
         } catch (error) {
             throw new Error('Falha ao buscar aluguel: ' + error.message);

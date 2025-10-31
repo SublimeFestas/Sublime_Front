@@ -13,3 +13,13 @@
 @use 'vuetify/settings' with (
   $body-font-family: 'Poppins'
 );
+
+.v-date-picker-weekdays th {
+  width: auto !important;
+  white-space: nowrap;
+  font-size: 12px !important;
+}::v-deep(.v-date-picker-table) {
+  flex-wrap: nowrap;
+}::v-deep(.v-date-picker-header) {
+  justify-content: space-between;
+}

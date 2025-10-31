@@ -1,7 +1,7 @@
 <template>
-  <div style="display: flex; background-color: #C8E2CB; padding: 20px; height: 100vh; gap: 20px;">
-    <side-menu/>
-    <v-main>
+  <div style="display: flex; padding: 20px; height: 100vh; gap: 20px; background-color: #fff; justify-content: space-around;">
+    <side-menu style="min-width: 250px;"/>
+    <v-main max-width="80%">
       <slot></slot>
     </v-main>
   </div>

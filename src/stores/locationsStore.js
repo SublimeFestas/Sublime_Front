@@ -5,15 +5,30 @@ import LocationsService from '../services/locationsService';
 export const useLocationsStore = defineStore('locations', () => {
   const loading = ref(false);
   const isLoading = computed(() => loading.value);
+  const total_pages = ref(0)
 
   const getLocations = async (page) => {
     loading.value = true;
     try {
       const response = await LocationsService.getAllLocations(page);
+      total_pages.value = response.total_pages
       console.log('Alugueis carregados:', response);
-      return response;
+      return response.results;
     } catch (error) {
       console.error('Erro ao realizar a requisicao dos alugueis:', error);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const getFilteredLocations = async (filterParams, page) => {
+    loading.value = true;
+    try {
+      const response = await LocationsService.getFilteredLocations(filterParams, page);
+      console.log('Alugueis filtrados carregados:', response);
+      return response.results;
+    } catch (error) {
+      console.error('Erro ao realizar a requisicao dos alugueis filtrados:', error);
     } finally {
       loading.value = false;
     }
@@ -23,9 +38,23 @@ export const useLocationsStore = defineStore('locations', () => {
     loading.value = true;
     try {
       const response = await LocationsService.getLocation(id);
+      console.log('buscou' + id)
       return response;
     } catch (error) {
       console.error('Erro ao realizar a requisicao do aluguel por ID:', error);
+    } finally {
+      loading.value = false;
+    }
+  };
+
+  const getLocationsByUserId = async (userId) => {
+    loading.value = true;
+    try {
+      const response = await LocationsService.getLocationsByUserId(userId);
+      console.log('Alugueis do usuario carregados:', response);
+      return response;
+    } catch (error) {
+      console.error('Erro ao realizar a requisicao dos alugueis do usuario:', error);
     } finally {
       loading.value = false;
     }
@@ -70,8 +99,11 @@ export const useLocationsStore = defineStore('locations', () => {
   return {
     loading,
     isLoading,
+    total_pages,
     getLocations,
+    getFilteredLocations,
     getLocationById,
+    getLocationsByUserId,
     createLocation,
     updateLocation,
     deleteLocation,
