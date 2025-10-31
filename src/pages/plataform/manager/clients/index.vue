@@ -134,7 +134,7 @@
           <v-pagination
             v-model="currentPage"
             :length="totalPages"
-            :total-visible="7"
+            :total-visible="10"
             rounded="circle"
             style="margin: 0;"
           ></v-pagination>
@@ -162,6 +162,7 @@ const headers = [
 const loading = ref(false)
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
+const totalPages = ref(0)
 
 const filters = ref({
   search: ''
@@ -174,6 +175,8 @@ async function loadUsers() {
   loading.value = true
   try {
     allUsers.value = await usersStore.getFilteredUsers(filters.value.search, currentPage.value)
+    totalPages.value = usersStore.total_pages
+    console.log(`Usuários da página ${currentPage.value}:`, allUsers.value)
   } catch (error) {
     console.error('Erro ao carregar usuários:', error)
     allUsers.value = []
@@ -182,26 +185,12 @@ async function loadUsers() {
   }
 }
 
-onMounted(async () => { 
-  loading.value = true 
-  try { 
-    allUsers.value = await usersStore.getUsers()
-    console.log('Usuários carregados:', allUsers.value)
-  } catch (error) { 
-    console.log('Erro ao carregar usuários:', error) 
-  } finally { 
-    loading.value = false 
-  } 
+onMounted(() => {
+  loadUsers() // primeira chamada usa página 1
 })
 
-const paginatedUsers = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage.value
-  const end = start + itemsPerPage.value
-  return allUsers.value.slice(start, end)
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(allUsers.value.length / itemsPerPage.value)
+watch(currentPage, () => {
+  loadUsers() // recarrega quando muda de página
 })
 
 const startItem = computed(() => {

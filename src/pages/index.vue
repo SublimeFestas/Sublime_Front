@@ -39,7 +39,7 @@
             <img src="@/assets/icons/Party.svg" alt=""></li>
         </ul>
         <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;"
-          size="large">Locar</v-btn>
+          size="large" to="/plataform/locations/create">Locar</v-btn>
       </div>
       <div>
         <img src="@/assets/cardBolinhas.png" alt="">
@@ -140,7 +140,7 @@
         <p>São 4 horas de festa, as horas adicionais custam uma taxa. O valor da locação do lugar não inclui serviços adicionais.</p>
         <p>O valor da locação varia nos valores de acordo com o dia da semana escolhido, sendo nos finais de semana um valor mais alto.</p>
         <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;"
-          size="large">Locar</v-btn>
+          size="large" to="/plataform/locations/create">Locar</v-btn>
       </div>
     </div>
   </main>

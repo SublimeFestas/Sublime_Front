@@ -5,11 +5,13 @@ import LocationsService from '../services/locationsService';
 export const useLocationsStore = defineStore('locations', () => {
   const loading = ref(false);
   const isLoading = computed(() => loading.value);
+  const total_pages = ref(0)
 
   const getLocations = async (page) => {
     loading.value = true;
     try {
       const response = await LocationsService.getAllLocations(page);
+      total_pages.value = response.total_pages
       console.log('Alugueis carregados:', response);
       return response.results;
     } catch (error) {
@@ -97,6 +99,7 @@ export const useLocationsStore = defineStore('locations', () => {
   return {
     loading,
     isLoading,
+    total_pages,
     getLocations,
     getFilteredLocations,
     getLocationById,

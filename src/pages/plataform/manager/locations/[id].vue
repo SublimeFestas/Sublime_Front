@@ -241,7 +241,6 @@ const locationsStore = useLocationsStore()
 
 const route = useRoute()
 const locationID = route.params.id || route.path.split('/')[4]
-console.log('locationID:', locationID)
 
 const loading = ref(true)
 const location = ref(null)

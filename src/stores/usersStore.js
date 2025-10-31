@@ -6,11 +6,14 @@ export const useUsersStore = defineStore('users', () => {
   const loading = ref(false);
   const isLoading = computed(() => loading.value);
   const selectedUser = ref(null);
+  const total_pages = ref(0)
 
   const getUsers = async (page) => {
     loading.value = true;
     try {
       const response = await usersService.getAllUsers(page);
+      total_pages.value = response.total_pages
+      console.log(total_pages.value)
       console.log('Usuarios carregados:', response);
       return response.results  ;
     } catch (error) {
@@ -24,6 +27,7 @@ export const useUsersStore = defineStore('users', () => {
     loading.value = true;
     try {
       const response = await usersService.getFilteredUsers(filterParams, page);
+      total_pages.value = response.total_pages
       console.log('Usuarios filtrados carregados:', response);
       return response.results;
     } catch (error) {
@@ -84,6 +88,7 @@ export const useUsersStore = defineStore('users', () => {
   return {
     loading,
     isLoading,
+    total_pages,
     getUsers,
     getFilteredUsers,
     getUserById,

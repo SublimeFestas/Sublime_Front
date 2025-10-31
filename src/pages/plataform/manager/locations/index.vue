@@ -175,6 +175,7 @@ const loading = ref(false)
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
 const allLocations = ref([])
+const totalpages = ref(0)
 
 const filters = ref({
   search: '',
@@ -199,6 +200,8 @@ async function loadLocations(){
   loading.value = true
   try {
     allLocations.value = await locationsStore.getFilteredLocations(filters.value.search, currentPage.value)
+    totalPages.value = locationsStore.total_pages
+    console.log('total de paginas', totalPages)
   } catch (error) {
     console.error('Erro ao carregar usuários:', error)
     allLocations.value = []
@@ -212,15 +215,13 @@ onMounted(async () => {
   try { 
     allLocations.value = await locationsStore.getLocations()
     console.log('Usuários carregados:', allLocations.value)
+    totalPages.value = locationsStore.total_pages
+    console.log('total de paginas', totalPages.value)
   } catch (error) { 
     console.log('Erro ao carregar usuários:', error) 
   } finally { 
     loading.value = false 
   } 
-})
-
-const totalPages = computed(() => {
-  return Math.ceil(allLocations.value.length / itemsPerPage.value)
 })
 
 const startItem = computed(() => {
