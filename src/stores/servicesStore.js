@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref, computed } from 'vue';
-import ServicesService from '../services/ServicesService.js';
+import ServicesService from '../services/servicesService.js';
 
 export const useServicesStore = defineStore('Services', () => {
   const loading = ref(false);
