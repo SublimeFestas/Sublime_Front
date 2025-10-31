@@ -16,9 +16,11 @@
     "@fontsource/poppins": "^5.2.6",
     "@fontsource/roboto": "5.2.5",
     "@mdi/font": "7.4.47",
+    "@vuepic/vue-datepicker": "^11.0.3",
     "axios": "^1.9.0",
+    "datepicker": "^0.0.0",
     "vue": "^3.5.13",
-    "vuetify": "^3.8.1"
+    "vuetify": "^3.10.7"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.0",
