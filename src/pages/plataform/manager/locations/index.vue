@@ -167,18 +167,16 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue'
+import { formatDate, formatCurrency, getInitials } from '@/utils'
+import {useLocationsStore} from '@/stores/locationsStore.js'
+const locationsStore = useLocationsStore()
 
-// Estado reativo
 const loading = ref(false)
 const currentPage = ref(1)
-const itemsPerPage = ref(7)
+const itemsPerPage = ref(10)
+const allLocations = ref([])
 
 const filters = ref({
-  search: '',
-  status: null
-})
-
-const appliedFilters = ref({
   search: '',
   status: null
 })
@@ -196,11 +194,6 @@ const headers = [
   { title: 'Status', key: 'status', align: 'center', sortable: true, width: '130px' },
   { title: 'Ações', key: 'actions', align: 'center', sortable: false, width: '150px' }
 ]
-
-import {useLocationsStore} from '@/stores/locationsStore.js'
-const locationsStore = useLocationsStore()
-
-const allLocations = ref([])
 
 async function loadLocations(){
   loading.value = true
@@ -246,30 +239,6 @@ watch(itemsPerPage, () => {
   currentPage.value = 1
 })
 
-// Métodos
-function getInitials(name) {
-  const names = name.split(' ')
-  return names.length >= 2
-    ? (names[0][0] + names[names.length - 1][0]).toUpperCase()
-    : name.substring(0, 2).toUpperCase()
-}
-
-function formatDate(dateString) {
-  const date = new Date(dateString + 'T00:00:00')
-  return date.toLocaleDateString('pt-BR', {
-    day: '2-digit',
-    month: '2-digit',
-    year: 'numeric'
-  })
-}
-
-function formatCurrency(value) {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(value)
-}
-
 function getStatusColor(status) {
   return status === 'PAGO' ? 'success' : 'warning'
 }
@@ -278,15 +247,9 @@ function getStatusIcon(status) {
   return status === 'PAGO' ? 'mdi-check-circle' : 'mdi-clock-alert'
 }
 
-function applyFilters() {
-  appliedFilters.value = { ...filters.value }
-  currentPage.value = 1
-}
-
 function clearFilters() {
   filters.value = { search: '', status: null }
-  appliedFilters.value = { search: '', status: null }
-  currentPage.value = 1
+  loadLocations()
 }
 </script>
 

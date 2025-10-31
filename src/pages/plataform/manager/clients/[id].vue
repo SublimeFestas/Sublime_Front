@@ -244,7 +244,7 @@ const getStatusIcon = (status) => {
 }
 
 const deleteUser = () => {
-  const autorizeDelete = confirm(`Deseja teletar usuario #${userID} Nome:${user.name}? Esta ação é irreversível.`)
+  const autorizeDelete = confirm(`Deseja teletar usuario #${userID} Nome:${user.value.name}? Esta ação é irreversível.`)
   if (autorizeDelete){
     userStore.deleteUser(userID)
     route.push('/plataform/manager/clients')

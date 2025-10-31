@@ -54,6 +54,7 @@ const route = useRoute();
 const menuItems = [
   { title: "Locações", icon: "document_icon.svg", route:"/plataform/manager/locations"},
   { title: "Clientes", icon: "group_icon.svg", route: "/plataform/manager/clients"},
+  { title: "Serviços", icon: "services.svg", route: "/plataform/manager/services"},
 ];
 
 const selectedItem = computed(() => {

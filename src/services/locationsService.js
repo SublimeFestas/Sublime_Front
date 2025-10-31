@@ -28,9 +28,10 @@ class LocationsService {
             throw new Error('Falha ao buscar alugueis por usuario: ' + error.message);
         }
     }
+    
     async getLocation(id) {
         try {
-            const { data } = await api.get(`/alugueis/${id}`);
+            const { data } = await api.get(`/alugueis/${id}/`);
             return data;
         } catch (error) {
             throw new Error('Falha ao buscar aluguel: ' + error.message);

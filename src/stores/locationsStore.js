@@ -36,6 +36,7 @@ export const useLocationsStore = defineStore('locations', () => {
     loading.value = true;
     try {
       const response = await LocationsService.getLocation(id);
+      console.log('buscou' + id)
       return response;
     } catch (error) {
       console.error('Erro ao realizar a requisicao do aluguel por ID:', error);

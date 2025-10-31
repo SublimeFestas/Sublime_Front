@@ -13,7 +13,7 @@
       "
     >
       <img
-        src="@/assets/logoSublimeSimbolo.png"
+        src="@/assets/logo.png"
         alt="Logo"
         width="90"
         height="90"
