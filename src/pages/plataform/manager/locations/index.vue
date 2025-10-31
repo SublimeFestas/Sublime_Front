@@ -175,7 +175,7 @@ const loading = ref(false)
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
 const allLocations = ref([])
-const totalpages = ref(0)
+const totalPages = ref(0)
 
 const filters = ref({
   search: '',
