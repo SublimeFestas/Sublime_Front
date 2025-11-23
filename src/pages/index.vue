@@ -66,77 +66,76 @@
         </div>
       </div>
     </div>
-    <div style="display: flex; justify-content: space-between; margin-top: 150px; max-width: 1300px; width: 100%" :style="screenWidth > 1200 ? '' : 'flex-direction: column; align-items: center;'">
+    <div style="display: flex; justify-content: space-between; margin-top: 150px; max-width: 1300px; width: 100%" :style="screenWidth > 1200 ? '' : 'flex-direction: column; align-items: center; margin-top: 80px;'">
       <div style="display: flex; flex-direction: column; align-items: start; width: 100%;">
-        <h2 style="font-size: 40px; font-weight: 400;">Quem somos?</h2>
+        <h2 style="font-size: 40px; font-weight: 400;" :style="screenWidth > 1200 ? '' : 'font-size: 24px; margin-bottom: 20px'">Quem somos?</h2>
         <img src="@/assets/quemSomos.jpg" alt="" style="width: 500px; margin-top: 40px;" v-if="screenWidth > 1200">
       </div>
-      <div style="display: flex; flex-direction: column; justify-content: space-between;">
-        <div style="display: flex; align-items: center; gap: 30px;">
-          <div><img src="@/assets/icons/hands.svg" alt=""></div>
+      <div style="display: flex; flex-direction: column; justify-content: space-between; max-width: 100vw; gap: 20px; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 30px;" :style="screenWidth < 1200 ? 'gap: 0px' : '' ">
+          <div><img src="@/assets/icons/hands.svg" alt="" v-if="screenWidth > 1200"></div>
           <div
-            style="width: 600px; height: 200px; box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.25); border-radius: 15px; display: flex; align-items: center; padding: 0px 40px;">
+            style="width: 600px; height: 200px; box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.25); border-radius: 15px; display: flex; align-items: center; padding: 0px 40px;" :style="screenWidth < 1200 ? 'height: auto; width: 100%; border-radius: 8px; padding: 10px 20px' : '' ">
             Somos uma empresa focada em festas infantis com o objetivo de agregar no seu evento, tornando-o mais
             agadável.</div>
         </div>
-        <div style="display: flex; align-items: center; gap: 30px;">
-          <div><img src="@/assets/icons/ballons.svg" alt=""></div>
+        <div style="display: flex; align-items: center; gap: 30px;" :style="screenWidth < 1200 ? 'gap: 0px' : '' ">
+          <div><img src="@/assets/icons/ballons.svg" alt="" v-if="screenWidth > 1200"></div>
           <div
-            style="width: 600px; height: 200px; box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.25); border-radius: 15px; display: flex; align-items: center; padding: 0px 40px;">
+            style="width: 600px; height: 200px; box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.25); border-radius: 15px; display: flex; align-items: center; padding: 0px 40px; " :style="screenWidth < 1200 ? 'height: auto; width: 100%; border-radius: 8px; padding: 10px 20px' : '' ">
             Nós fornecemos cozinha equipada, banheiros acessíveis para deficientes, espaço kids e ambiente climatizado
             com capacidade de 60 pessoas.</div>
         </div>
-        <div style="display: flex; align-items: center; gap: 30px;">
-          <div><img src="@/assets/icons/eat.svg" alt=""></div>
+        <div style="display: flex; align-items: center; gap: 30px;" :style="screenWidth < 1200 ? 'gap: 0px' : '' ">
+          <div><img src="@/assets/icons/eat.svg" alt="" v-if="screenWidth > 1200"></div>
           <div
-            style="width: 600px; height: 200px; box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.25); border-radius: 15px; display: flex; align-items: center; padding: 0px 40px;">
+            style="width: 600px; height: 200px; box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.25); border-radius: 15px; display: flex; align-items: center; padding: 0px 40px;" :style="screenWidth < 1200 ? 'height: auto; width: 100%; border-radius: 8px; padding: 10px 20px' : '' ">
             Temos serviços adicionais como louças de luxo, copeira, monitor, arcos de balões e decorações</div>
         </div>
       </div>
     </div>
-    <div style="display: flex; margin-top: 150px; justify-content: space-between;" :style="screenWidth < 1200 ? 'flex-direction: column':''">
-      <div style="display: flex; flex-direction: column; justify-content: space-around;">
-        <h2 style="font-size: 40px; font-weight: 400;">Onde estamos localizados?</h2>
+    <div style="display: flex; margin-top: 150px; justify-content: space-between; max-width: 100vw; gap: 80px;" :style="screenWidth < 1200 ? 'flex-direction: column; margin-top: 80px':''">
+      <div style="display: flex; flex-direction: column; justify-content: space-around; " :style="screenWidth < 1200 ? 'gap: 20px' : '' ">
+        <h2 style="font-size: 40px; font-weight: 400;" :style="screenWidth > 1200 ? '' : 'font-size: 24px; margin-bottom: 20px'">Onde estamos localizados?</h2>
         <div
-          style="display: flex; align-items: center; gap: 30px; width: 550px; height: 150px; border: 5px solid #A5B293; padding: 0px 40px; border-radius: 15px;">
-          <div><img src="@/assets/icons/googleMaps.svg" alt=""></div>
+          style="display: flex; align-items: center; gap: 30px; width: 550px; height: 150px; border: 5px solid #A5B293; padding: 0px 40px; border-radius: 15px;" :style="screenWidth < 1200 ? 'gap: 0px; border: 3px solid #A5B293; padding: 20px 20px; height: auto; width: 100%' : '' ">
+          <div><img src="@/assets/icons/googleMaps.svg" alt="" v-if="screenWidth > 1200"></div>
           <div>O nosso salão de festas fica localizado no bairro Ulysses Guimarâes em Joinville, na rua Antenor Douat
             Baptista.</div>
         </div>
         <div
-          style="display: flex; align-items: center; gap: 30px; width: 550px; height: 150px; border: 5px solid #A5B293; padding: 0px 40px; border-radius: 15px;">
-          <div><img src="@/assets/icons/parking.svg" alt=""></div>
+          style="display: flex; align-items: center; gap: 30px; width: 550px; height: 150px; border: 5px solid #A5B293; padding: 0px 40px; border-radius: 15px;" :style="screenWidth < 1200 ? 'gap: 0px; border: 3px solid #A5B293; padding: 20px 20px; height: auto; width: 100%' : '' ">
+          <div><img src="@/assets/icons/parking.svg" alt="" v-if="screenWidth > 1200"></div>
           <div>Fornecemos estacionamento com capacidade para 5 carros.</div>
         </div>
       </div>
-      <div>
+      <div :style="screenWidth < 1200 ? 'margin-top: 15px;' : ''">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1788.038195182706!2d-48.79903296265829!3d-26.32402579340067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94deb34a17e8eed7%3A0x4dd6d74a2c751523!2sSublime%20Festas%20%26%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1760112777894!5m2!1spt-BR!2sbr"
-          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1788.038195182706!2d-48.79903296265829!3d-26.32402579340067!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94deb34a17e8eed7%3A0x4dd6d74a2c751523!2sSublime%20Festas%20%26%20Eventos!5e0!3m2!1spt-BR!2sbr!4v1760112777894!5m2!1spt-BR!2sbr" height="450" style="border:0;" allowfullscreen="" loading="lazy" :width="screenWidth > 1200 ? 600 : screenWidth * 0.9"
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
-    <div style="margin-top: 150px;">
-      <div style="text-align: center;"><h2 style="font-weight: 400; font-size: 40px;">Horário de Funcionamento</h2></div>
-      <div style="display: flex; gap: 30px; justify-content: center; font-size: 20px;">
-        <div style="width: 300px; display: flex; flex-direction: column; align-items: end; justify-content: center;">
-          <h3 style="font-weight: 400;">Todos os dias</h3>
-          <h3>Segunda - Domingo</h3>
+    <div style="margin-top: 150px;" :style="screenWidth > 1200 ? '' : 'margin-top: 80px;'">
+      <div style="text-align: center;"><h2 style="font-weight: 400; font-size: 40px;" :style="screenWidth > 1200 ? '' : 'font-size: 24px; margin-bottom: 20px'">Horário de Funcionamento</h2></div>
+      <div style="display: flex; gap: 30px; justify-content: center; font-size: 20px;" :style="screenWidth < 1200 ? 'flex-direction: column; gap: 20px; justify-content: center; align-items: center' : ''">
+        <div style="width: 300px; display: flex; flex-direction: column; align-items: end; justify-content: center;" :style="screenWidth > 1200 ? '' : 'align-items: center;'">
+          <h3 style="font-weight: 400;" :style="screenWidth > 1200 ? '' : 'font-size: 16px;'">Todos os dias</h3>
+          <h3 :style="screenWidth > 1200 ? '' : 'font-size: 16px;'">Segunda - Domingo</h3>
         </div>
-        <img src="@/assets/icons/clockBig.svg" alt="" style="width: 250px;">
-        <div style="width: 300px; display: flex; flex-direction: column; justify-content: center;">
-          <h3 style="font-weight: 400;">Horario dás</h3>
-          <h3>8h - 20h</h3>
+        <img src="@/assets/icons/clockBig.svg" alt="" style="width: 250px;" :style="screenWidth > 1200 ? '' : 'width: 150px;'">
+        <div style="width: 300px; display: flex; flex-direction: column; justify-content: center;" :style="screenWidth > 1200 ? '' : 'align-items: center;'">
+          <h3 style="font-weight: 400;" :style="screenWidth > 1200 ? '' : 'font-size: 16px;'">Horario dás</h3>
+          <h3 :style="screenWidth > 1200 ? '' : 'font-size: 16px;'">8h - 20h</h3>
         </div>
       </div>
     </div>
-    <div style="display: flex; justify-content: center; gap: 50px; margin-top: 150px; margin-bottom: 200px;">
-      <div v-if="screenWidth > 1200"><img src="@/assets/salaoInterior.jpg" alt="" style="height: 350px;"></div>
+    <div style="display: flex; justify-content: center; gap: 50px; margin-top: 150px; margin-bottom: 200px; max-width: 100vw;" :style="screenWidth > 1200 ? '' : 'padding: 20px; margin-top: 80px;'">
+      <div v-if="screenWidth > 1200"><img src="@/assets/salaoInterior.jpg" alt="" style="height: 350px;" v-if="screenWidth > 1200"></div>
       <div style="display: flex; flex-direction: column; justify-content: space-between; width: 550px;">
-        <h2 style="font-size: 40px; font-weight: 400;">Tempo de festa</h2>
+        <h2 style="font-size: 40px; font-weight: 400;" :style="screenWidth > 1200 ? '' : 'font-size: 24px; margin-bottom: 20px'">Tempo de festa</h2>
         <p>São 4 horas de festa, as horas adicionais custam uma taxa. O valor da locação do lugar não inclui serviços adicionais.</p>
         <p>O valor da locação varia nos valores de acordo com o dia da semana escolhido, sendo nos finais de semana um valor mais alto.</p>
-        <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;"
+        <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700; " :style="screenWidth > 1200 ? '' : 'margin-top: 60px; width: 100%'"
           size="large" to="/plataform/locations/create">Locar</v-btn>
       </div>
     </div>

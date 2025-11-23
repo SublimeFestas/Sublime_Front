@@ -8,8 +8,6 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    Datapicker: typeof import('./components/Datapicker.vue')['default']
-    DataPicker: typeof import('./components/dataPicker.vue')['default']
     DatePicker: typeof import('./components/datePicker.vue')['default']
     PlataformLayout: typeof import('./components/layouts/PlataformLayout.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

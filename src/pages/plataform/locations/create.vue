@@ -12,7 +12,7 @@
         </div>
       </v-card-title>
 
-      <v-stepper v-model="currentStep" non-linear style="padding: 0px 50px; height: 75vh; overflow-y: scroll;" flat>
+      <v-stepper v-model="currentStep" non-linear style="padding: 0px 0px; height: 75vh; overflow-y: scroll;" flat>
         <v-stepper-header style="display: none;">
           <v-stepper-item title="Data e Hora" :value="1"></v-stepper-item>
           <v-divider></v-divider>
@@ -303,7 +303,7 @@
         </v-stepper-window>
       </v-stepper>
 
-      <v-card-actions style="padding: 20px; display: flex; justify-content: space-between; height: 10vh; padding: 0px 100px 40px;">
+      <v-card-actions style="padding: 20px; display: flex; justify-content: space-between; height: 10vh; padding: 0px 100px 40px;" :style="screenWidth > 1200 ? '' : 'padding: 20px'">
         <v-btn @click="previousStep" :disabled="currentStep === 1">
           <v-icon start>mdi-arrow-left</v-icon> Anterior
         </v-btn>
