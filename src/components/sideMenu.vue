@@ -21,7 +21,7 @@
         style="margin:5px 5px; gap: 5px;"
         :style="item.title === selectedItem ? 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 5px !important' : ''">
         <template #prepend>
-          <img :src="getIconPath(item.icon)" alt="" style="width:22px; height:22px;" />
+          <img :style="item.title === selectedItem ? 'filter: invert(100%);' : ''" :src="getIconPath(item.icon)" alt="" style="width:22px; height:22px;" />
         </template>
         <v-list-item-title>{{ item.title }}</v-list-item-title>
       </v-list-item>

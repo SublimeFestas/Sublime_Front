@@ -1,78 +1,75 @@
 <template>
-  <header style="display: flex; justify-content: space-between; align-items: center; padding: 35px 60px;">
+  <header style="display: flex; justify-content: space-between; align-items: center; padding: 35px 70px;" v-if="screenWidth > 1200">
     <div><img src="@/assets/logo.png" style="height: 60px;" alt="Logo"></div>
-    <div>
-      <nav>
-        <ul style="display: flex; gap: 100px; list-style: none;">
-          <li>Estrutura</li>
-          <li>Quem somos?</li>
-          <li>Localização</li>
-          <li>Horários</li>
-          <li>Informações adicionais</li>
-        </ul>
-      </nav>
-    </div>
-    <div></div>
+    <nav style="width: 100%;">
+      <ul style="display: flex; list-style: none; justify-content: space-around; width: auto;">
+        <li>Estrutura</li>
+        <li>Quem somos?</li>
+        <li>Localização</li>
+        <li>Horários</li>
+        <li>Informações adicionais</li>
+      </ul>
+    </nav>
   </header>
   <main
-    style="padding: 0px, 60px; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+    style="display: flex; justify-content: center; align-items: center; flex-direction: column;" :style="screenWidth > 1200 ? 'padding: 0px 70px' : 'padding: 0px 20px; margin-top: 30px;'">
     <div style="position: relative; width: 90vw;">
       <img src="@/assets/banner.png" alt="" width="100%">
-      <img style="position: absolute; bottom: -30px; left: calc(50% - 90px);" src="@/assets/logoCompleta.png" alt="">
+      <img style="position: absolute; bottom: -30px; left: calc(50% - 90px); border-radius: 10px;" src="@/assets/logoCompleta.png" alt="">
     </div>
-    <div style="display: flex; gap: 300px; width: 100%; margin-top: 100px; justify-content: center;">
-      <div style="display: flex; flex-direction: column; justify-content: space-around;">
-        <h2 style="font-size: 24px; font-weight: 400; width: 600px;">A <span style="color: #847339;">Sublime Festas &
+    <div style="display: flex; width: 100%; margin-top: 100px; max-width: 1300px; justify-content: space-between;" :style="screenWidth < 1200 ? 'flex-direction: column; align-items: center' : ''">
+      <div style="display: flex; flex-direction: column; justify-content: space-around; gap: 30px;">
+        <h2 style="font-size: 24px; font-weight: 400;">A <span style="color: #847339;" :style="screenWidth > 1200 ? 'width: 600px' : 'width: 100%; background-red'">Sublime Festas &
             Eventos</span> tem o que você precisa!</h2>
-        <ul style="list-style: none; display: flex; gap: 35px;">
+        <ul style="list-style: none; display: flex; gap: 20px;" :style="screenWidth < 1200 ? 'justify-content: space-between; flex-wrap: wrap;' : ''">
           <li
-            style="display: flex; justify-content: center; align-items: center; width: 100px; height: 100px; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;">
+            style="display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;" :style="screenWidth > 1200 ? 'width: 100px; height: 100px' : 'width: 45%; height: 80px'">
             <img src="@/assets/icons/Who.svg" alt=""></li>
           <li
-            style="display: flex; justify-content: center; align-items: center; width: 100px; height: 100px; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;">
+            style="display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;" :style="screenWidth > 1200 ? 'width: 100px; height: 100px' : 'width: 45%; height: 80px'">
             <img src="@/assets/icons/Destination.svg" alt=""></li>
           <li
-            style="display: flex; justify-content: center; align-items: center; width: 100px; height: 100px; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;">
+            style="display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;" :style="screenWidth > 1200 ? 'width: 100px; height: 100px' : 'width: 45%; height: 80px'">
             <img src="@/assets/icons/Clock.svg" alt=""></li>
           <li
-            style="display: flex; justify-content: center; align-items: center; width: 100px; height: 100px; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;">
+            style="display: flex; justify-content: center; align-items: center; box-shadow: 0px 2px 5px 2px rgba(172, 172, 172, 0.50); border-radius: 8px;" :style="screenWidth > 1200 ? 'width: 100px; height: 100px' : 'width: 45%; height: 80px'">
             <img src="@/assets/icons/Party.svg" alt=""></li>
         </ul>
-        <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;"
+        <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;" :style="screenWidth < 1200 ? 'align-self: center; width: 100%' : ''"
           size="large" to="/plataform/locations/create">Locar</v-btn>
       </div>
       <div>
-        <img src="@/assets/cardBolinhas.png" alt="">
+        <img src="@/assets/cardBolinhas.png" alt="" style="width: 100%; max-width: 400px;" v-if="screenWidth > 1200">
       </div>
     </div>
     <div>
-      <div style="display: flex; border: 5px solid #A5B293; border-radius: 20px; margin-top: 150px;">
+      <div style="display: flex; margin-top: 150px; max-width: 1300px" :style="screenWidth < 1200 ? 'align-items: center; flex-wrap: wrap; font-size: 8px; border: 2px solid #A5B293; border-radius: 5px;' : 'border: 5px solid #A5B293; border-radius: 20px;'">
         <div
-          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px; padding: 50px 60px;">
+          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px;" :style="screenWidth < 1200 ? 'padding: 10px 10px' : 'padding: 50px 60px'">
           <img src="@/assets/icons/arCondicionado.svg" alt="">
           <p>Ambiente <br>climatizado</p>
         </div>
         <div
-          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px; padding: 50px 60px;">
+          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px;" :style="screenWidth < 1200 ? 'padding: 10px 10px' : 'padding: 50px 60px'">
           <img src="@/assets/icons/escorrega.svg" alt="">
           <p>Area infantil com <br> brinquedos</p>
         </div>
         <div
-          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px; padding: 50px 60px; background-color: #A5B293; transform: scale(1.2); border-radius: 15px; color: white;">
+          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px; background-color: #A5B293; color: white;" :style="screenWidth < 1200 ? 'padding: 10px 10px; border-radius: 5px; transform: scale(1.08)' : 'padding: 50px 60px; transform: scale(1.2); border-radius: 15px;'">
           <img src="@/assets/icons/geladeira.svg" alt="">
           <p>Cozinha <br> equipada</p>
         </div>
         <div
-          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px; padding: 50px 60px;">
+          style="display: flex; flex-direction: column; text-align: center; justify-content: center; align-items: center; gap: 10px;" :style="screenWidth < 1200 ? 'padding: 10px 10px' : 'padding: 50px 60px'">
           <img src="@/assets/icons/cadeiraRodas.svg" alt="">
           <p>Banheiros <br> acessíveis</p>
         </div>
       </div>
     </div>
-    <div style="display: flex; gap: 150px; margin-top: 150px;">
-      <div>
+    <div style="display: flex; justify-content: space-between; margin-top: 150px; max-width: 1300px; width: 100%" :style="screenWidth > 1200 ? '' : 'flex-direction: column; align-items: center;'">
+      <div style="display: flex; flex-direction: column; align-items: start; width: 100%;">
         <h2 style="font-size: 40px; font-weight: 400;">Quem somos?</h2>
-        <img src="@/assets/quemSomos.jpg" alt="" style="width: 500px; margin-top: 40px;">
+        <img src="@/assets/quemSomos.jpg" alt="" style="width: 500px; margin-top: 40px;" v-if="screenWidth > 1200">
       </div>
       <div style="display: flex; flex-direction: column; justify-content: space-between;">
         <div style="display: flex; align-items: center; gap: 30px;">
@@ -97,7 +94,7 @@
         </div>
       </div>
     </div>
-    <div style="display: flex; gap: 150px; margin-top: 150px;">
+    <div style="display: flex; margin-top: 150px; justify-content: space-between;" :style="screenWidth < 1200 ? 'flex-direction: column':''">
       <div style="display: flex; flex-direction: column; justify-content: space-around;">
         <h2 style="font-size: 40px; font-weight: 400;">Onde estamos localizados?</h2>
         <div
@@ -134,7 +131,7 @@
       </div>
     </div>
     <div style="display: flex; justify-content: center; gap: 50px; margin-top: 150px; margin-bottom: 200px;">
-      <div><img src="@/assets/salaoInterior.jpg" alt="" style="height: 350px;"></div>
+      <div v-if="screenWidth > 1200"><img src="@/assets/salaoInterior.jpg" alt="" style="height: 350px;"></div>
       <div style="display: flex; flex-direction: column; justify-content: space-between; width: 550px;">
         <h2 style="font-size: 40px; font-weight: 400;">Tempo de festa</h2>
         <p>São 4 horas de festa, as horas adicionais custam uma taxa. O valor da locação do lugar não inclui serviços adicionais.</p>
@@ -144,7 +141,7 @@
       </div>
     </div>
   </main>
-  <footer>
+  <footer v-if="screenWidth > 1200">
     <div style="border-top: 1px solid #444711; padding: 50px 50px; display: flex; justify-content: space-between; margin: 0px 50px;">
       <div>
         <img src="@/assets/logoCompleta.png" style="height:105px;">
@@ -178,4 +175,21 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
+const screenWidth = ref(window.innerWidth);
+const screenHeight = ref(window.innerHeight);
+
+function updateSize() {
+  screenWidth.value = window.innerWidth;
+  screenHeight.value = window.innerHeight;
+}
+
+onMounted(() => {
+  window.addEventListener("resize", updateSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", updateSize);
+});
 </script>
