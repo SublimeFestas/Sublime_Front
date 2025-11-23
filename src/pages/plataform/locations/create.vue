@@ -324,6 +324,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 
+const screenWidth = ref(window.innerWidth);
+
 const currentStep = ref(1)
 
 const formData = ref({
