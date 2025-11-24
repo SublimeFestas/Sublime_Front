@@ -13,6 +13,12 @@ import App from './App.vue'
 // Composables
 import { createApp } from 'vue'
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js");
+  });
+}
+
 // Styles
 import 'unfonts.css'
 import '@/styles/settings.scss'

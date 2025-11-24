@@ -7,6 +7,7 @@ import Vue from '@vitejs/plugin-vue'
 import VueRouter from 'unplugin-vue-router/vite'
 import { VueRouterAutoImports } from 'unplugin-vue-router'
 import Vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // Utilities
 import { defineConfig } from 'vite'
@@ -46,6 +47,22 @@ export default defineConfig({
       styles: {
         configFile: 'src/styles/settings.scss',
       },
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'icons/*.png'],
+      manifest: {
+        name: 'Sublime App',
+        short_name: 'Sublime',
+        start_url: '/',
+        display: 'standalone',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        icons: [
+          { src: '/icons/pwa-192.png', sizes: '192x192', type: 'image/png' },
+          { src: '/icons/pwa-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+        ]
+      }
     }),
     Fonts({
       fontsource: {
