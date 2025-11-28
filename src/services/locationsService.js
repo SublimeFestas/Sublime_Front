@@ -13,7 +13,13 @@ class LocationsService {
 
     async getFilteredLocations(filterParams, page) {
         try {
-            const { data } = await api.get(`/alugueis?search=${filterParams}&page=${page}`);
+            const { data } = await api.get('/alugueis', {
+                params: {
+                    search: filterParams,
+                    page: page
+                }
+            });
+
             return data;
         } catch (error) {
             throw new Error('Falha ao buscar alugueis filtrados: ' + error.message);

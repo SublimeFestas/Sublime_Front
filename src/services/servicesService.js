@@ -12,7 +12,13 @@ class ServicessService {
 
     async getFilteredServices(filterParams, page) {
         try {
-            const { data } = await api.get(`/servicos?search=${filterParams}&page=${page}`);
+            const { data } = await api.get('/servicos', {
+                params: {
+                    search: filterParams,
+                    page: page
+                }
+            });
+
             return data;
         } catch (error) {
             throw new Error('Falha ao buscar servicos filtrados: ' + error.message);

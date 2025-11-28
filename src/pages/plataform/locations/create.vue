@@ -33,9 +33,8 @@
               <v-row style="display: flex; justify-content: center; padding-top: 30px;">
                 <v-col cols="12" md="6" style="height: 100%;">
                   <div style="border-radius: 8px; height: 50vh; display: flex; justify-content: center;">
-                    <date-picker :modelValue="formData.data"/>
+                    <date-picker :modelValue="formData.data" @update:modelValue="val => formData.data = val" />
                   </div>
-                  {{ formData.data }}
                 </v-col>
               </v-row>
             </v-card-text>
@@ -49,7 +48,7 @@
 
               <v-row>
                 <v-col 
-                  v-for="servico in availableServices" 
+                  v-for="servico in services" 
                   :key="servico.id"
                   cols="12"
                   sm="6"
@@ -74,7 +73,7 @@
                         ></v-checkbox>
                         <div style="flex: 1;">
                           <h4 style="font-size: 14px; font-weight: 600; color: #212121; margin: 0 0 4px 0;">
-                            {{ servico.nome }}
+                            {{ servico.nomeServico }}
                           </h4>
                           <p style="font-size: 12px; color: #757575; margin: 0 0 8px 0;">
                             {{ servico.descricao }}
@@ -93,9 +92,9 @@
                 <v-col cols="12">
                   <div style="background-color: #f5f5f5; border-radius: 8px; padding: 16px;">
                     <p style="font-size: 12px; color: #757575; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Serviços Selecionados</p>
-                    <div v-if="formData.servicos.length > 0">
+                    <div v-if="formData.servico_ids.length > 0">
                       <div 
-                        v-for="servicoId in formData.servicos"
+                        v-for="servicoId in formData.servico_ids"
                         :key="servicoId"
                         style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e0e0e0;"
                       >
@@ -109,7 +108,7 @@
                       <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; margin-top: 8px;">
                         <span style="font-size: 14px; font-weight: 600; color: #212121;">Total Serviços</span>
                         <span style="font-size: 16px; font-weight: 700; color: #667eea;">
-                          {{ formatCurrency(totalServicos) }}
+                          {{ formatCurrency(totalServico_ids) }}
                         </span>
                       </div>
                     </div>
@@ -131,7 +130,7 @@
               <v-row>
                 <v-col cols="12">
                   <v-textarea
-                    v-model="formData.descFesta"
+                    v-model="formData.desc_festa"
                     label="Descrição da Festa"
                     placeholder="Descreva os detalhes da sua festa, tema, número de convidados, etc..."
                     variant="outlined"
@@ -158,7 +157,7 @@
                   <div style="background-color: #f5f5f5; border-radius: 8px; padding: 16px;">
                     <p style="font-size: 12px; color: #757575; margin: 0 0 12px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Festa</p>
                     <p style="font-size: 13px; color: #424242; line-height: 1.6; white-space: pre-wrap;">
-                      {{ formData.descFesta || 'Nenhuma descrição fornecida' }}
+                      {{ formData.desc_festa || 'Nenhuma descrição fornecida' }}
                     </p>
                   </div>
                 </v-col>
@@ -186,19 +185,19 @@
                   <div style="background-color: #f5f5f5; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
                     <p style="font-size: 12px; color: #757575; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Data e Hora</p>
                     <p style="font-size: 16px; font-weight: 600; color: #212121; margin: 0;">
-                      {{ formatDateTimeDisplay() }}
+                      {{ formData.data }}
                     </p>
                   </div>
 
                   <div style="background-color: #f5f5f5; border-radius: 8px; padding: 16px;">
                     <p style="font-size: 12px; color: #757575; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Serviços Selecionados</p>
-                    <div v-if="formData.servicos.length > 0">
+                    <div v-if="formData.servico_ids.length > 0">
                       <div 
-                        v-for="servicoId in formData.servicos"
+                        v-for="servicoId in formData.servico_ids"
                         :key="servicoId"
                         style="font-size: 13px; color: #424242; margin-bottom: 4px;"
                       >
-                        • {{ getServiceName(servicoId) }} - {{ formatCurrency(getServiceValue(servicoId)) }}
+                        {{ getServiceName(servicoId) }} - {{ formatCurrency(getServiceValue(servicoId)) }}
                       </div>
                     </div>
                     <p v-else style="font-size: 13px; color: #9e9e9e; margin: 0; font-style: italic;">
@@ -211,7 +210,7 @@
                   <div style="background-color: #f5f5f5; border-radius: 8px; padding: 16px; margin-bottom: 16px;">
                     <p style="font-size: 12px; color: #757575; margin: 0 0 8px 0; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">Descrição da Festa</p>
                     <p style="font-size: 13px; color: #424242; line-height: 1.6; white-space: pre-wrap; margin: 0;">
-                      {{ formData.descFesta || 'Não informado' }}
+                      {{ formData.desc_festa || 'Não informado' }}
                     </p>
                   </div>
 
@@ -322,7 +321,26 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useServicesStore } from '@/stores/servicesStore.js'
+
+const servicesStore = useServicesStore()
+const services = ref([])
+const loading = ref(false)
+
+async function loadServices(){
+  loading.value = true
+  try {
+    const data = await servicesStore.getServices()
+    services.value = data
+
+  } catch (error) {
+    console.error('Erro ao carregar usuários:', error)
+    services.value = []
+  } finally {
+    loading.value = false
+  }
+}
 
 const screenWidth = ref(window.innerWidth);
 
@@ -330,54 +348,28 @@ const currentStep = ref(1)
 
 const formData = ref({
   data: '',
-  servicos: [],
-  descFesta: '',
-  descDecoracao: ''
+  servico_ids: [],
+  desc_festa: '',
+  desc_decoracao: '',
+  valor_festa: 0
 })
-
-const availableServices = ref([
-  { id: 1, nome: 'Louças', descricao: 'Aluguel de louças e utensílios', valor: 250.00 },
-  { id: 2, nome: 'Copeira', descricao: 'Profissional para servir bebidas', valor: 350.00 },
-  { id: 3, nome: 'Decoração', descricao: 'Decoração temática completa', valor: 800.00 },
-  { id: 4, nome: 'Catering', descricao: 'Serviço de alimentação', valor: 1200.00 },
-  { id: 5, nome: 'Fotografia', descricao: 'Fotógrafo profissional', valor: 600.00 },
-  { id: 6, nome: 'DJ', descricao: 'DJ com equipamento de som', valor: 700.00 }
-])
 
 const valorBase = ref(1500.00)
 
-const unavailableDates = ref([
-  '2025-10-25',
-  '2025-10-26',
-  '2025-10-27',
-  '2025-11-01',
-  '2025-11-02'
-])
 
-const totalServicos = computed(() => {
-  return formData.value.servicos.reduce((total, servicoId) => {
-    const servico = availableServices.value.find(s => s.id === servicoId)
-    return total + (servico ? servico.valor : 0)
+
+const totalServico_ids = computed(() => {
+  return formData.value.servico_ids.reduce((total, servicoId) => {
+    const servico = services.value.find(s => s.id === servicoId)
+    const valor = servico ? Number(servico.valor) : 0
+    return total + valor
   }, 0)
 })
 
-const valorTotal = computed(() => valorBase.value + totalServicos.value)
+const valorTotal = computed(() => formData.value.valor_festa = valorBase.value + totalServico_ids.value)
 
 function allowedDates(date) {
   return !unavailableDates.value.includes(date)
-}
-
-function formatDateTimeDisplay() {
-  if (!formData.value.data || !formData.value.hora) return 'Não selecionado'
-  const date = new Date(formData.value.data + 'T' + formData.value.hora)
-  return date.toLocaleDateString('pt-BR', {
-    weekday: 'long',
-    day: '2-digit',
-    month: 'long',
-    year: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit'
-  })
 }
 
 function formatCurrency(value) {
@@ -388,25 +380,25 @@ function formatCurrency(value) {
 }
 
 function isServiceSelected(servicoId) {
-  return formData.value.servicos.includes(servicoId)
+  return formData.value.servico_ids.includes(servicoId)
 }
 
 function toggleService(servicoId) {
-  const index = formData.value.servicos.indexOf(servicoId)
+  const index = formData.value.servico_ids.indexOf(servicoId)
   if (index > -1) {
-    formData.value.servicos.splice(index, 1)
+    formData.value.servico_ids.splice(index, 1)
   } else {
-    formData.value.servicos.push(servicoId)
+    formData.value.servico_ids.push(servicoId)
   }
 }
 
 function getServiceName(servicoId) {
-  const servico = availableServices.value.find(s => s.id === servicoId)
-  return servico ? servico.nome : 'Desconhecido'
+  const servico = services.value.find(s => s.id === servicoId)
+  return servico ? servico.nomeServico : 'Desconhecido'
 }
 
 function getServiceValue(servicoId) {
-  const servico = availableServices.value.find(s => s.id === servicoId)
+  const servico = services.value.find(s => s.id === servicoId)
   return servico ? servico.valor : 0
 }
 
@@ -428,15 +420,23 @@ function cancelCreation() {
   }
 }
 
+function paraISO(dataStr) {
+  const data = new Date(dataStr);
+  return data.toISOString();
+}
+
 function confirmRental() {
   console.log('Locação confirmada:', {
-    data: formData.value.data,
-    hora: formData.value.hora,
-    servicos: formData.value.servicos,
-    descFesta: formData.value.descFesta,
+    data: paraISO(formData.value.data),
+    servico_ids: formData.value.servico_ids,
+    desc_festa: formData.value.desc_festa,
     descDecoracao: formData.value.descDecoracao,
     valorTotal: valorTotal.value
   })
   alert('Locação criada com sucesso!')
 }
+
+onMounted(()  => {
+  loadServices()
+})
 </script>

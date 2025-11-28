@@ -16,6 +16,7 @@ const emit = defineEmits(['update:modelValue'])
 // Função para emitir valor atualizado
 function updateValue(value: string) {
   emit('update:modelValue', value)
+  console.log(value);
 }
 </script>
 
