@@ -44,6 +44,15 @@ class LocationsService {
         }
     }
 
+    async createLocation(locationData) {
+        try {
+            await api.post('/alugueis/', locationData);
+            console.log('Aluguel criado com sucesso');
+        } catch (error) {
+            throw new Error('Falha ao criar aluguel: ' + error.message);
+        }
+    }
+
     async updateLocation(id, locationData) {
         try {
             await api.put(`/alugueis/${id}`, locationData);

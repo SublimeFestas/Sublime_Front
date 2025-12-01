@@ -36,7 +36,7 @@
             <img src="@/assets/icons/Party.svg" alt=""></li>
         </ul>
         <v-btn width="200px" rounded="md" style="background-color: #A5B293; color: white; font-weight: 700;" :style="screenWidth < 1200 ? 'align-self: center; width: 100%' : ''"
-          size="large" to="/plataform/locations/create">Locar</v-btn>
+          size="large" to="/plataform/auth/login">Locar</v-btn>
       </div>
       <div>
         <img src="@/assets/cardBolinhas.png" alt="" style="width: 100%; max-width: 400px;" v-if="screenWidth > 1200">

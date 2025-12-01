@@ -323,8 +323,11 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { useServicesStore } from '@/stores/servicesStore.js'
+import { useLocationsStore } from '@/stores/locationsStore.js'
+import router from '@/router'
 
 const servicesStore = useServicesStore()
+const locationsStore = useLocationsStore()
 const services = ref([])
 const loading = ref(false)
 
@@ -426,14 +429,14 @@ function paraISO(dataStr) {
 }
 
 function confirmRental() {
-  console.log('Locação confirmada:', {
-    data: paraISO(formData.value.data),
-    servico_ids: formData.value.servico_ids,
-    desc_festa: formData.value.desc_festa,
-    descDecoracao: formData.value.descDecoracao,
-    valorTotal: valorTotal.value
-  })
-  alert('Locação criada com sucesso!')
+  formData.value.data = paraISO(formData.value.data)
+  try{
+    locationsStore.createLocation(formData.value)
+  } catch (error) {
+    console.error('Erro ao criar locação:', error)
+  } finally {
+    router.push('/plataform/locations/my-locations')
+  }
 }
 
 onMounted(()  => {

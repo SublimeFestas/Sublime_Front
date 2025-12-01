@@ -135,8 +135,13 @@ const valid = computed(() => {
 async function Login() {
   try {
     console.log("Dados enviados:", user.email, user.senha);
-    await UserLogin.login(user.email, user.senha);
-    router.push("/plataform/manager/locations");
+    const response = await UserLogin.login(user.email, user.senha);
+    console.log(response);
+    if (response.user.is_staff) {
+      router.push("/plataform/manager/");
+    } else {
+      router.push("/plataform/locations/create");
+    }
   } catch (error) {
     if (error.response?.status === 401) {
       console.error("Erro de autenticação: Usuário ou senha inválidos.");

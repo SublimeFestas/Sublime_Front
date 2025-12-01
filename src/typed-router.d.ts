@@ -24,6 +24,7 @@ declare module 'vue-router/auto-routes' {
     '/plataform/auth/login': RouteRecordInfo<'/plataform/auth/login', '/plataform/auth/login', Record<never, never>, Record<never, never>>,
     '/plataform/auth/register': RouteRecordInfo<'/plataform/auth/register', '/plataform/auth/register', Record<never, never>, Record<never, never>>,
     '/plataform/locations/create': RouteRecordInfo<'/plataform/locations/create', '/plataform/locations/create', Record<never, never>, Record<never, never>>,
+    '/plataform/locations/myLocations/': RouteRecordInfo<'/plataform/locations/myLocations/', '/plataform/locations/myLocations', Record<never, never>, Record<never, never>>,
     '/plataform/manager/': RouteRecordInfo<'/plataform/manager/', '/plataform/manager', Record<never, never>, Record<never, never>>,
     '/plataform/manager/clients/': RouteRecordInfo<'/plataform/manager/clients/', '/plataform/manager/clients', Record<never, never>, Record<never, never>>,
     '/plataform/manager/clients/[id]': RouteRecordInfo<'/plataform/manager/clients/[id]', '/plataform/manager/clients/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
