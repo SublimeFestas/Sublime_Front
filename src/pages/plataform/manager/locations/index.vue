@@ -5,7 +5,7 @@
         <!-- Cabeçalho -->
         <v-card-title style="padding: 40px 24px 10px;">
           <div style="display: flex; align-items: center; width: 100%;">
-            <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard </span> > Listagem de Locações</p>
+            <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard </span> > Listagem de locações</p>
           </div>
         </v-card-title>
 

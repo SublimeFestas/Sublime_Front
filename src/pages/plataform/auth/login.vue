@@ -87,7 +87,7 @@
         </v-btn>
       </v-form>
       <div style="text-align: center; margin-top: 8px">
-        <span style="font-size: 14px">Não Possui Conta?</span>
+        <span style="font-size: 14px">Não possui conta?</span>
         <router-link
           to="/plataform/auth/register"
           style="

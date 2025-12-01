@@ -6,7 +6,7 @@
                 <v-card-title style="padding: 40px 24px 10px; display: flex;">
                     <div style="display: flex; align-items: center; width: 100%;">
                         <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard </span> >
-                            Listagem de Serviços</p>
+                            Listagem de serviços</p>
                     </div>
                     <div>
                         <v-btn color="black" variant="outlined" prepend-icon="mdi-plus" style="text-transform: none; font-weight: 500;"

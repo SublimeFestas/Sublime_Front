@@ -8,7 +8,7 @@
                     <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                         <div style="display: flex; align-items: center;">
                             <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard >
-                                    Listagem de Locações </span> > Detalhes da Locação #{{ location.id }}</p>
+                                    Listagem de locações </span> > Detalhes da locação #{{ location.id }}</p>
                         </div>
                         <v-btn icon variant="text" color="primary" to="/plataform/manager/locations">
                             <v-icon>mdi-close</v-icon>

@@ -7,7 +7,7 @@
         <v-card-title style=" padding: 20px 40px;">
           <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
             <div style="display: flex; align-items: center;">
-              <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard > Listagem de Clientes </span> > Detalhes do Cliente #{{ user.id }}</p>
+              <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard > Listagem de clientes </span> > Detalhes do cliente #{{ user.id }}</p>
             </div>
             <v-btn
               icon
