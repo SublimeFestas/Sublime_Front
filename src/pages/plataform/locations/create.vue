@@ -435,7 +435,7 @@ function confirmRental() {
   } catch (error) {
     console.error('Erro ao criar locação:', error)
   } finally {
-    router.push('/plataform/locations/my-locations')
+    router.push('/plataform/locations/myLocations')
   }
 }
 

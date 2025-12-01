@@ -53,6 +53,16 @@ class LocationsService {
         }
     }
 
+    async pagarAluguel(aluguelId) {
+        try {
+            const { data } = await api.patch(`/alugueis/${aluguelId}/`, { status: 'PAGO' })
+            return data
+        } catch (error) {
+            console.error('Erro ao pagar aluguel:', error)
+            throw new Error('Erro ao pagar aluguel: ' + (error.message || error))
+        }
+    }
+
     async updateLocation(id, locationData) {
         try {
             await api.put(`/alugueis/${id}`, locationData);

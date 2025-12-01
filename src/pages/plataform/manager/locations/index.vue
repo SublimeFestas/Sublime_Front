@@ -169,7 +169,9 @@
 import { ref, computed, watch } from 'vue'
 import { formatDate, formatCurrency, getInitials } from '@/utils'
 import {useLocationsStore} from '@/stores/locationsStore.js'
+import countsServices from '@/services/allcountsService.js'
 const locationsStore = useLocationsStore()
+
 
 const loading = ref(false)
 const currentPage = ref(1)
@@ -210,10 +212,14 @@ async function loadLocations(){
   }
 }
 
+const counts = ref({})
+
 onMounted(async () => { 
   loading.value = true 
   try { 
     allLocations.value = await locationsStore.getLocations()
+    counts.value = await countsServices.getCounts()
+    console.log('Contagens carregadas:', counts.value)
     console.log('Usuários carregados:', allLocations.value)
     totalPages.value = locationsStore.total_pages
     console.log('total de paginas', totalPages.value)

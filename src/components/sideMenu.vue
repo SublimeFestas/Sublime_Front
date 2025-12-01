@@ -27,27 +27,25 @@
       </v-list-item>
     </v-list>
 
-    <!-- Base: Botão de logout fixo -->
-    <template>
-      <div style="padding:24px 16px; border-top:1px solid #f3f3f3;">
+      <div style="padding:20px 5px;">
         <v-btn
           color="error"
           block
           @click="Logout"
-          style="width:100%; padding:10px 0; font-size:1rem; font-weight:bold;">
+          style="width:100%; padding:10px 0; font-size:1rem; font-weight:bold; background: linear-gradient(135deg, #d93025 100%); color: white; border-radius: 5px !important">
           Sair
         </v-btn>
       </div>
-    </template>
   </v-card>
 </template>
 
 <script setup>
 import { computed } from "vue";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import UserLogin from "@/services/userAuthService.js";
+import { useUserAuth } from "@/stores/userAuthStore.js";
 
-const router = useRouter();
+const User = useUserAuth();
 const route = useRoute();
 
 // Função para obter o caminho correto do ícone
@@ -55,14 +53,22 @@ const getIconPath = (iconName) => {
   return `/icons/${iconName}`;
 };
 
-const menuItems = [
-  { title: "Locações", icon: "document_icon.svg", route:"/plataform/manager/locations"},
-  { title: "Clientes", icon: "group_icon.svg", route: "/plataform/manager/clients"},
-  { title: "Serviços", icon: "services.svg", route: "/plataform/manager/services"},
+const menuClienteItens = [
+  { title: "Locações", icon: "document_icon.svg", route: "/plataform/locations/myLocations" },
+]
+
+const menuAdminItems = [
+  { title: "Locações", icon: "document_icon.svg", route:"/plataform/manager/locations" },
+  { title: "Clientes", icon: "group_icon.svg", route: "/plataform/manager/clients" },
+  { title: "Serviços", icon: "services.svg", route: "/plataform/manager/services" },
 ];
 
+const menuItems = computed(() => 
+  User?.state?.user?.is_staff ? menuAdminItems : menuClienteItens
+);
+
 const selectedItem = computed(() => {
-  const found = menuItems.find(item => route.path.startsWith(item.route));
+  const found = menuItems.value.find(item => route.path.startsWith(item.route));
   return found ? found.title : "";
 });
 
@@ -70,4 +76,9 @@ async function Logout() {
   UserLogin.logout();
 
 }
+
+onMounted(() => {
+  User.getMe();
+});
+
 </script>

@@ -106,8 +106,10 @@
 
 <script setup>
 import { ref, computed } from "vue";
-import UserLogin from "@/services/userAuthService.js";
+import { useUserAuth } from "@/stores/userAuthStore.js";
 import { useRouter } from "vue-router";
+
+const UserAuth = useUserAuth();
 
 const alertIcon = '/icons/alert_icon.svg';
 
@@ -135,8 +137,7 @@ const valid = computed(() => {
 async function Login() {
   try {
     console.log("Dados enviados:", user.email, user.senha);
-    const response = await UserLogin.login(user.email, user.senha);
-    console.log(response);
+    const response = await UserAuth.login(user.email, user.senha);
     if (response.user.is_staff) {
       router.push("/plataform/manager/");
     } else {

@@ -7,10 +7,9 @@
                 <v-card-title style=" padding: 20px 40px;">
                     <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                         <div style="display: flex; align-items: center;">
-                            <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Dashboard >
-                                    Listagem de locações </span> > Detalhes da locação #{{ location.id }}</p>
+                            <p style="font-size: 24px; font-weight: 400;"><span style="color: gray;"> Usuário > Perfil </span> > Detalhes da locação #{{ location.id }}</p>
                         </div>
-                        <v-btn icon variant="text" color="primary" to="/plataform/manager/locations">
+                        <v-btn icon variant="text" color="primary" to="/plataform/locations/myLocations">
                             <v-icon>mdi-close</v-icon>
                         </v-btn>
                     </div>
@@ -211,19 +210,17 @@
                     <!-- Botões de Ação -->
                     <v-row style="margin-top: 32px;">
                         <v-col cols="12" style="display: flex; gap: 12px;">
-                            <!-- 
-                            <v-btn color="primary" prepend-icon="mdi-pencil"
-                                style="text-transform: none; font-weight: 500;" @click="editlocation">
-                                Editar Locação
+                            <v-btn v-if="location.status == 'PENDENTE'" color="success" variant="outlined" prepend-icon="mdi-currency-usd"
+                                style="text-transform: none; font-weight: 500;" @click="pagarAluguel(location.id)">
+                                Pagar Agora
                             </v-btn>
-                            -->
                             <v-btn color="success" variant="outlined" prepend-icon="mdi-download"
                                 style="text-transform: none; font-weight: 500;" @click="downloadInvoice">
                                 Baixar Recibo
                             </v-btn>
                             <v-btn color="error" variant="outlined" prepend-icon="mdi-delete"
                                 style="text-transform: none; font-weight: 500;" @click="deletelocation">
-                                Excluir Locação
+                                Cancelar Locação
                             </v-btn>
                         </v-col>
                     </v-row>
@@ -237,6 +234,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatDate, formatCurrency, getInitials, formatDateTime } from '@/utils/index.js'
+import LocationsService from '@/services/locationsService';
 import { useLocationsStore } from '@/stores/locationsStore.js'
 
 const locationsStore = useLocationsStore()
@@ -259,6 +257,15 @@ const valorTotal = computed(() => {
 const getStatusColor = (status) => (status === 'PAGO' ? 'success' : 'warning')
 const getStatusIcon = (status) => (status === 'PAGO' ? 'mdi-check-circle' : 'mdi-clock-alert')
 
+const pagarAluguel = async (aluguelId) => {
+    try {
+        await LocationsService.pagarAluguel(aluguelId)
+        location.value.status = 'PAGO'
+    } catch (error) {
+        console.error('Erro ao pagar aluguel:', error)
+    }
+}
+
 const editlocation = () => {
     console.log('Editar locação:', location.value)
 }
@@ -271,7 +278,7 @@ const deletelocation = async () => {
     const autorizeDelete = confirm(`Deseja teletar usuario #${locationID} de:${location.value.user.name}? Esta ação é irreversível.`)
     if (autorizeDelete) {
         locationsStore.deleteLocation(locationID)
-        route.push('/plataform/manager/locations')
+        route.push('/plataform/locations/myLocations')
     }
 }
 

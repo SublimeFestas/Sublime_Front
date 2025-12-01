@@ -29,12 +29,22 @@ class UserLogin {
         }
     }
 
+    async getMe() {
+        try {
+            const { data } = await api.get("/usuarios/me/");
+            return data;
+        } catch (error) {
+            console.error("Erro ao buscar dados do usuário:", error);
+            throw error;
+        }
+    }
+
+
     logout() {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
         delete api.defaults.headers.common["Authorization"];
         console.log("Logout efetuado");
-        // Redirecione para a página de login
         window.location.href = "/plataform/auth/login";
     }
 }
