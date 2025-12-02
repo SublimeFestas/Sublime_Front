@@ -21,10 +21,11 @@ export const useLocationsStore = defineStore('locations', () => {
     }
   };
 
-  const getFilteredLocations = async (filterParams, page) => {
+  const getFilteredLocations = async (filterParams, page, status) => {
     loading.value = true;
     try {
-      const response = await LocationsService.getFilteredLocations(filterParams, page);
+      const response = await LocationsService.getFilteredLocations(filterParams, page, status);
+      total_pages.value = response.total_pages;
       console.log('Alugueis filtrados carregados:', response);
       return response.results;
     } catch (error) {

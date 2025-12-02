@@ -21,7 +21,6 @@
               variant="outlined"
               density="comfortable"
               clearable
-              @input="loadUsers"
               hide-details
               style="background-color: white;"
             ></v-text-field>
@@ -45,13 +44,11 @@
         <v-data-table
           :headers="headers"
           :items="allUsers"
-          :items-per-page="itemsPerPage"
-          :page="currentPage"
           :loading="loading"
           class="elevation-1"
           style="border-radius: 4px; margin-top: 16px;"
-          @update:page="currentPage = $event"
           hide-default-footer
+          items-per-page="-1"
         >
           <!-- Slot customizado para ID -->
           <template v-slot:item.id="{ item }">
@@ -129,7 +126,7 @@
         <!-- Informações de Paginação -->
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 0 4px;">
           <div style="color: #757575; font-size: 14px;">
-            Mostrando {{ startItem }} a {{ endItem }} de {{ allUsers.length }} usuários
+            Mostrando {{ startItem }} a {{ endItem }} de {{ totalItems }} usuários
           </div>
           <v-pagination
             v-model="currentPage"
@@ -146,7 +143,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { useUsersStore } from '@/stores/usersStore.js'
 import { useRoute } from 'vue-router'
 
@@ -174,7 +171,11 @@ const allUsers = ref([])
 async function loadUsers() {
   loading.value = true
   try {
-    allUsers.value = await usersStore.getFilteredUsers(filters.value.search, currentPage.value)
+    if (filters.value.search) {
+      allUsers.value = await usersStore.getFilteredUsers(filters.value.search, currentPage.value)
+    } else {
+      allUsers.value = await usersStore.getUsers(currentPage.value)
+    }
     totalPages.value = usersStore.total_pages
     console.log(`Usuários da página ${currentPage.value}:`, allUsers.value)
   } catch (error) {
@@ -186,11 +187,20 @@ async function loadUsers() {
 }
 
 onMounted(() => {
-  loadUsers() // primeira chamada usa página 1
+  loadUsers()
 })
 
 watch(currentPage, () => {
-  loadUsers() // recarrega quando muda de página
+  loadUsers()
+})
+
+watch(() => filters.value.search, () => {
+  currentPage.value = 1
+  loadUsers()
+})
+
+const totalItems = computed(() => {
+  return usersStore.total_pages * itemsPerPage.value
 })
 
 const startItem = computed(() => {
@@ -201,7 +211,7 @@ const startItem = computed(() => {
 
 const endItem = computed(() => {
   const end = currentPage.value * itemsPerPage.value
-  return end > allUsers.value.length ? allUsers.value.length : end
+  return end > totalItems.value ? totalItems.value : end
 })
 
 function clearFilters() {

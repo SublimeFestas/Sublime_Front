@@ -237,6 +237,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { formatDate, formatCurrency, getInitials, formatDateTime } from '@/utils/index.js'
+import { generateLocationReport } from '@/utils/pdfGenerator.js'
 import { useLocationsStore } from '@/stores/locationsStore.js'
 
 const locationsStore = useLocationsStore()
@@ -264,7 +265,21 @@ const editlocation = () => {
 }
 
 const downloadInvoice = () => {
-    console.log('Baixar recibo da locação:', location.value)
+    console.log('Iniciando download do recibo...')
+    console.log('Location data:', location.value)
+    
+    if (location.value) {
+        try {
+            generateLocationReport(location.value)
+            console.log('PDF gerado com sucesso!')
+        } catch (error) {
+            console.error('Erro ao gerar PDF:', error)
+            alert('Erro ao gerar o recibo: ' + error.message)
+        }
+    } else {
+        console.error('Dados da locação não encontrados')
+        alert('Dados da locação não carregados')
+    }
 }
 
 const deletelocation = async () => {

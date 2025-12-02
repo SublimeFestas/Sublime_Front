@@ -1,18 +1,25 @@
 import api from '@/plugins/api'
 
 class UsersService {
-    async getAllUsers() {
+    async getAllUsers(page = 1) {
         try {
-            const { data } = await api.get('/usuarios');
+            const { data } = await api.get('/usuarios', {
+                params: { page }
+            });
             return data;
         } catch (error) {
             throw new Error('Falha ao buscar usuarios: ' + error.message);
         }
     }
 
-    async getFilteredUsers(filterParams, page) {
+    async getFilteredUsers(filterParams, page = 1) {
         try {
-            const { data } = await api.get(`/usuarios?search=${filterParams}&page=${page}`);
+            const { data } = await api.get('/usuarios', {
+                params: {
+                    search: filterParams,
+                    page: page
+                }
+            });
             return data;
         } catch (error) {
             throw new Error('Falha ao buscar usuarios filtrados: ' + error.message);

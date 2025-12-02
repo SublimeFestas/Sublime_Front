@@ -23,7 +23,6 @@
                 clearable
                 hide-details
                 style="background-color: white;"
-                @input="loadLocations"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="2">
@@ -36,7 +35,6 @@
                 clearable
                 hide-details
                 style="background-color: white;"
-                @input="loadLocations"
               ></v-select>
             </v-col>
             <v-col cols="12" md="2">
@@ -58,13 +56,11 @@
           <v-data-table
             :headers="headers"
             :items="allLocations"
-            :items-per-page="itemsPerPage"
-            :page="currentPage"
             :loading="loading"
             class="elevation-1"
             style="border-radius: 4px; margin-top: 16px; max-height: 100%;"
-            @update:page="currentPage = $event"
             hide-default-footer
+            items-per-page="-1"
           >
             <!-- Slot customizado para Data -->
             <template v-slot:item.data="{ item }">
@@ -149,7 +145,7 @@
           <!-- Informações de Paginação -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px; padding: 0 4px;">
             <div style="color: #757575; font-size: 14px;">
-              Mostrando {{ startItem }} a {{ endItem }} de {{ allLocations.length }} locações
+              Mostrando {{ startItem }} a {{ endItem }} de {{ totalItems }} locações
             </div>
             <v-pagination
               v-model="currentPage"
@@ -166,7 +162,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, onMounted } from 'vue'
 import { formatDate, formatCurrency, getInitials } from '@/utils'
 import {useLocationsStore} from '@/stores/locationsStore.js'
 import countsServices from '@/services/allcountsService.js'
@@ -177,7 +173,7 @@ const loading = ref(false)
 const currentPage = ref(1)
 const itemsPerPage = ref(10)
 const allLocations = ref([])
-const totalpages = ref(0)
+const totalPages = ref(0)
 
 const filters = ref({
   search: '',
@@ -201,11 +197,17 @@ const headers = [
 async function loadLocations(){
   loading.value = true
   try {
-    allLocations.value = await locationsStore.getFilteredLocations(filters.value.search, currentPage.value)
+    if (filters.value.search || filters.value.status) {
+      const searchParam = filters.value.search || ''
+      const statusParam = filters.value.status || ''
+      allLocations.value = await locationsStore.getFilteredLocations(searchParam, currentPage.value, statusParam)
+    } else {
+      allLocations.value = await locationsStore.getLocations(currentPage.value)
+    }
     totalPages.value = locationsStore.total_pages
-    console.log('total de paginas', totalPages)
+    console.log('total de paginas', totalPages.value)
   } catch (error) {
-    console.error('Erro ao carregar usuários:', error)
+    console.error('Erro ao carregar locações:', error)
     allLocations.value = []
   } finally {
     loading.value = false
@@ -217,17 +219,18 @@ const counts = ref({})
 onMounted(async () => { 
   loading.value = true 
   try { 
-    allLocations.value = await locationsStore.getLocations()
+    await loadLocations()
     counts.value = await countsServices.getCounts()
     console.log('Contagens carregadas:', counts.value)
-    console.log('Usuários carregados:', allLocations.value)
-    totalPages.value = locationsStore.total_pages
-    console.log('total de paginas', totalPages.value)
   } catch (error) { 
-    console.log('Erro ao carregar usuários:', error) 
+    console.log('Erro ao carregar locações:', error) 
   } finally { 
     loading.value = false 
   } 
+})
+
+const totalItems = computed(() => {
+  return locationsStore.total_pages * itemsPerPage.value
 })
 
 const startItem = computed(() => {
@@ -238,12 +241,27 @@ const startItem = computed(() => {
 
 const endItem = computed(() => {
   const end = currentPage.value * itemsPerPage.value
-  return end > allLocations.value.length ? allLocations.value.length : end
+  return end > totalItems.value ? totalItems.value : end
 })
 
 // Watchers
+watch(currentPage, () => {
+  loadLocations()
+})
+
+watch(() => filters.value.search, () => {
+  currentPage.value = 1
+  loadLocations()
+})
+
+watch(() => filters.value.status, () => {
+  currentPage.value = 1
+  loadLocations()
+})
+
 watch(itemsPerPage, () => {
   currentPage.value = 1
+  loadLocations()
 })
 
 function getStatusColor(status) {
